@@ -1,0 +1,177 @@
+<section class="overflow-y-auto pb-[50px]">
+  <div class="main-container">
+    <div class="header-container">
+      <strong>Deposit/Withdraw</strong>
+    </div>
+    <div class="px-4 py-3">
+      <div class="flex flex-col sm:flex-row items-center sm:space-x-2 mb-3">
+        <div class="w-full sm:w-auto flex-1 mb-2 sm:mb-0">
+          <my-date-picker class="form-control my-date-picker picker-border" placeholder="Start Date" name="mydate"
+                          [(ngModel)]="startDate" [options]="myDpOptions" readonly
+                          ></my-date-picker>
+        </div>
+        <div class="w-full sm:w-auto flex-1 mb-2 sm:mb-0">
+          <my-date-picker class="form-control my-date-picker picker-border" placeholder="End Date" name="mydate"
+                          [(ngModel)]="endDate" [options]="myDpOptions" readonly
+                          ></my-date-picker>
+        </div>
+
+        <!-- Type Dropdown -->
+        <div class="w-full sm:w-auto flex-1 mb-2 sm:mb-0">
+          <select class="form-control my-select picker-border w-full p-1.5 mb-1.5 rounded border border-gray-300 focus:outline-none"
+                  [(ngModel)]="selectedType" (ngModelChange)="onFilterChange()">
+            <option value="all">All</option>
+            <option value="deposit">Deposit</option>
+            <option value="withdraw">Withdraw</option>
+          </select>
+        </div>
+
+        <!-- Status Dropdown -->
+        <div class="w-full sm:w-auto flex-1 mb-2 sm:mb-0">
+          <select class="form-control my-select picker-border w-full p-1.5 mb-1.5 rounded border border-gray-300 focus:outline-none"
+                  [(ngModel)]="selectedStatus" (ngModelChange)="onFilterChange()">
+            <option value="all">All</option>
+            <option value="success">Success</option>
+            <option value="cancelled">Cancelled</option>
+            <option value="failed">Failed</option>
+            <option value="pending">Pending</option>
+          </select>
+        </div>
+
+        <button class="bg-[#00b181] text-base text-white px-4 py-[5px] mb-1.5 rounded flex-1 sm:flex-none" (click)="submitDate()">Search</button>
+      </div>
+      <div class="flex items-center justify-end mb-4">
+        <label class="flex items-center cursor-pointer">
+          <span class="mr-2 text-sm font-medium text-gray-700">Auto Refresh</span>
+          <input type="checkbox" [(ngModel)]="autoRefresh" (change)="toggleAutoRefresh()" class="hidden cursor-pointer">
+          <div class="w-[2.3rem] h-[1.2rem] bg-gray-300 rounded-full shadow-inner relative cursor-pointer"  [style.background-color]="autoRefresh ? '#00b181' : '#e5e7eb'">
+            <div class="absolute w-[1.1rem] h-[1.1rem] bg-white rounded-full shadow top-[0.5px] left-0 transition-transform cursor-pointer"
+                 [style.transform]="autoRefresh ? 'translateX(100%)' : 'translateX(0)'"></div>
+          </div>
+        </label>
+      </div>
+      <div class="overflow-x-auto">
+      <table datatable [dtOptions]="dtOptions" class="table w-full whitespace-nowrap border-b border-[#dee2e6] text-[12px]">
+        <thead>
+        <tr>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Id</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Date</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Username</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Amount</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Type</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Receipt</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Status</th>
+          <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Actions</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="transactions.length > 0">
+        <tr *ngFor="let transaction of transactions; let i = index"
+            [ngClass]="{'text-green-600': transaction.status === 'success', 'text-red-600': transaction.status === 'failed'}">
+          <td class="border-b border-[#dee2e6]">{{ i + 1 }}</td>
+          <td class="border-b border-[#dee2e6]">{{ transaction.createdAt | date: 'M/d/yy, h:mm:ss a' }}</td>
+          <td class="border-b border-[#dee2e6]">{{ transaction.user?.username }}</td>
+          <td class="border-b border-[#dee2e6]">{{ transaction.amount }}</td>
+          <td class="border-b border-[#dee2e6]">{{ transaction.type }}</td>
+          <td class="border-b border-[#dee2e6] text-center flex justify-center items-center h-[5vh]">
+            <img *ngIf="transaction.type === 'deposit'" src="/assets/receipt.png" class="w-[18px] cursor-pointer" (click)="showReceipt(transaction.receiptUrl)" alt="receipt_img">
+            <img *ngIf="transaction.type === 'withdraw'" src="/assets/sidebar/banks.png" class="w-[18px]" alt="bank_img" (click)="showBankDetails(transaction.bank)">
+          </td>
+          <td class="border-b border-[#dee2e6]">{{ transaction.status }}</td>
+          <td class="border-b border-[#dee2e6]">
+            <select class="form-control my-select picker-border w-full p-1.5 mb-1.5 rounded border border-gray-300 focus:outline-none"
+                    [(ngModel)]="transaction.status" [disabled]="transaction.status === 'success'"
+                    (ngModelChange)="onStatusChange(transaction, $event)">
+              <option value="success">Success</option>
+              <option value="failed">Failed</option>
+              <option value="pending">Pending</option>
+            </select>
+          </td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="transactions.length === 0">
+        <tr>
+          <td colspan="12" class="text-center">No matching records found</td>
+        </tr>
+        </tbody>
+      </table>
+</div>
+    </div>
+  </div>
+</section>
+
+
+<!--image modal-->
+<div *ngIf="isReceiptModalVisible" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-3/4 lg:w-1/2 relative overflow-y-auto">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" (click)="closeModal()">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+    <div *ngIf="selectedReceiptUrl; else noImageTemplate" class="p-3">
+      <!-- Apply max height directly to the image using Tailwind -->
+      <img [src]="selectedReceiptUrl" alt="Receipt Image" class="w-full h-auto max-h-[65vh] rounded-md">
+    </div>
+    <ng-template #noImageTemplate class="p-3">
+      <div class="flex flex-col items-center justify-center text-center py-10">
+        <i class="fas fa-image text-6xl text-gray-400 mb-4"></i>
+        <p class="text-lg text-gray-600">No image found</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+
+<!-- Bank Details Modal -->
+<div *ngIf="isBankModalVisible" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-3/4 lg:w-1/2 relative">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" (click)="closeModal()">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+    <div class="text-lg font-bold mb-4">Bank Details</div>
+
+    <div class="mb-2 flex items-center">
+      <strong>Bank Name:</strong>
+      <span class="ml-2">{{ selectedBank?.bankName }}</span>
+      <img  (click)="copyToClipboard(selectedBank?.bankName)" src="/assets/copy.png" class="ml-2 w-[20px]" alt="copy-clipboard"/>
+    </div>
+
+    <div class="mb-2 flex items-center">
+      <strong>Account Holder Name:</strong>
+      <span class="ml-2">{{ selectedBank?.accountHolderName }}</span>
+      <img  (click)="copyToClipboard(selectedBank?.accountHolderName)" src="/assets/copy.png" class="ml-2 w-[20px]" alt="copy-clipboard"/>
+    </div>
+
+    <div class="mb-2 flex items-center">
+      <strong>Account Number:</strong>
+      <span class="ml-2">{{ selectedBank?.accountNumber }}</span>
+      <img  (click)="copyToClipboard(selectedBank?.accountNumber)" src="/assets/copy.png" class="ml-2 w-[20px]" alt="copy-clipboard"/>
+    </div>
+
+    <div class="mb-2 flex items-center">
+      <strong>IBAN:</strong>
+      <span class="ml-2">{{ selectedBank?.IBAN }}</span>
+      <img  (click)="copyToClipboard(selectedBank?.IBAN)" src="/assets/copy.png" class="ml-2 w-[20px]" alt="copy-clipboard"/>
+    </div>
+
+    <div class="mb-2 flex items-center">
+      <strong>Status:</strong>
+      <span class="ml-2">{{ selectedBank?.status }}</span>
+      <img  (click)="copyToClipboard(selectedBank?.status)" src="/assets/copy.png" class="ml-2 w-[20px]" alt="copy-clipboard"/>
+    </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="isConfirmationModalVisible" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-11/12 sm:w-3/4 lg:w-1/2 relative">
+    <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-800" (click)="closeModal()">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+    <div class="text-lg font-bold mb-4">Confirmation</div>
+    <p>Are you sure you want to update the status to <strong>success</strong>? Once done, this cannot be undone.</p>
+    <div class="flex justify-end mt-4">
+      <button class="bg-gray-400 text-white px-4 py-2 rounded mr-2" (click)="closeModal()">Cancel</button>
+      <button class="bg-green-600 text-white px-4 py-2 rounded" (click)="confirmUpdate()">Confirm</button>
+    </div>
+  </div>
+</div>

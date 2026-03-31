@@ -1,0 +1,30 @@
+<div>
+  <div class="container">
+    <div class="px-2 mt-2">
+      <div class="grid grid-cols-12 gap-4 mt-4">
+        <div class="col-span-12 lg:col-span-2 font-semibold">
+          <div>
+            <div class="details-txt">
+              Account Details
+            </div>
+            <div class="menu-txt" routerLinkActive="selected-txt" [routerLink]="['/my-account/profile', userId, role]">
+              Profile
+            </div>
+            <div class="menu-txt" routerLinkActive="selected-txt"
+              [routerLink]="['/my-account/bet-history', userId, role]">Bet
+              History</div>
+            <div class="menu-txt" routerLinkActive="selected-txt"
+              [routerLink]="['/my-account/user-pl-report', userId, role]">P&L
+              Reports</div>
+            <div class="menu-txt" routerLinkActive="selected-txt"
+              [routerLink]="['/my-account/account-statement', userId, role]">Account Statement</div>
+          </div>
+        </div>
+        <!-- Router outlet -->
+        <div class="col-span-12 lg:col-span-10 card">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

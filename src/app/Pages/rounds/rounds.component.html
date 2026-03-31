@@ -1,0 +1,126 @@
+<section class="overflow-y-auto pb-[50px]">
+  <div class="main-container mb-5">
+    <div class="header-container">
+      <i class="fa fa-filter" aria-hidden="true"></i>
+      <strong>Search Rounds</strong>
+    </div>
+
+
+    <!-- search container started  -->
+    <div class="min-h-10 flex flex-col pt-5 pb-[3.05rem] px-1.5 relative">
+      <div class="flex">
+        <input type="text" placeholder="Search Round" class="input" id="roundId" autocomplete="false"
+          name="search-round" [(ngModel)]="searchRoundId">
+        <button class="search-btn" (click)="searchRoundById()">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          Search
+        </button>
+        <div *ngIf="authService.hasRole('SUPER')" class="ml-1">
+          <button class="bg-[rgb(0,177,129)] rounded text-white px-3 py-1.5" type="button"
+            (click)="settleRound('')">Round
+            Settlement</button>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table *ngIf="searchedRounds.length > 0"
+          class="table w-full whitespace-nowrap border-b border-[#dee2e6] text-[12px] mt-3">
+          <thead>
+            <tr class="text-left">
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Id</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Created At</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Round Id</th>
+
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Multiplier</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]" *ngIf="authService.hasRole('SUPER')">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let round of searchedRounds;let i = index">
+              <td class="border-b border-[#dee2e6]">{{ i + 1 }}</td>
+              <td class="border-b border-[#dee2e6]">{{ round.createdAt | date: 'M/d/yy, h:mm:ss a' }}</td>
+              <td class="border-b border-[#dee2e6]">
+                {{ round.roundId }}
+              </td>
+
+
+              <td class="border-b border-[#dee2e6]">{{ round.multiplier }}</td>
+              <td class="border-b border-[#dee2e6] flex justify-center" style="overflow: unset"
+                *ngIf="authService.hasRole('SUPER')">
+                <div *ngIf="authService.hasRole('SUPER')">
+                  <button class="bg-purple-500 rounded text-white px-3 py-1.5" type="button"
+                    (click)="settleRound(round.roundId)">Round Settlement</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="main-container">
+    <div class="header-container">
+      <strong>Round History</strong>
+    </div>
+    <div class="px-4 py-3">
+      <div class="flex items-center mb-3">
+        <div class="max-sm:w-full md:min-w-[140px] lg:min-w-[25%]">
+          <my-date-picker class="form-control my-date-picker picker-border" placeholder="Start Date" name="mydate"
+            [(ngModel)]="startDate" [options]="myDpOptions" readonly #dp></my-date-picker>
+        </div>
+        <div class="text-center text-[16px] font-bold px-2">-</div>
+        <div class="max-sm:w-full md:min-w-[140px] lg:min-w-[25%]">
+          <my-date-picker class="form-control my-date-picker picker-border" placeholder="End Date" name="mydate"
+            [(ngModel)]="endDate" [options]="myDpOptions" readonly #dp></my-date-picker>
+        </div>
+        <Button class="bg-[#00b181] text-base text-white px-4 py-[5px] rounded ml-2 mb-1.5"
+          (click)="submitDate()">Search</Button>
+      </div>
+      <div class="overflow-x-auto">
+        <table datatable [dtOptions]="dtOptions"
+          class="table w-full whitespace-nowrap border-b border-[#dee2e6] text-[12px]">
+          <thead>
+            <tr>
+              <!-- <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Id</th> -->
+
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Round Id</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Event Name</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Multiplier</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Created At</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">updated At</th>
+              <th class="border border-[#dee2e6] px-[4.8px] py-[5px]" *ngIf="authService.hasRole('SUPER')">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="rounds.length > 0">
+            <tr *ngFor="let round of rounds; let i = index">
+              <!-- <td class="border-b border-[#dee2e6]">{{ i + 1}}</td> -->
+
+              <td class="border-b border-[#dee2e6]">
+                {{ round.roundId }}
+              </td>
+              <td class="border-b border-[#dee2e6]">
+                {{ round.eventId.eventName }}
+              </td>
+              <td class="border-b border-[#dee2e6]">{{round.multiplier}}</td>
+              <td class="border-b border-[#dee2e6]">{{round.createdAt | date: 'M/d/yy, h:mm:ss a'}}</td>
+              <td class="border-b border-[#dee2e6]">{{round.updatedAt | date: 'M/d/yy, h:mm:ss a'}}</td>
+              <td class="border-b border-[#dee2e6] flex gap-2 justify-center items-center" style="overflow: unset"
+                *ngIf="authService.hasRole('SUPER')">
+                <div>
+                  <button class="bg-purple-500 rounded text-white px-3 py-1.5" type="button"
+                    (click)="settleRound(round.round)">Round Settlement</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="rounds.length === 0">
+            <tr>
+              <td colspan="8" class="text-center">No matching records found</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

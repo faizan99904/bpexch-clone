@@ -1,0 +1,39 @@
+.calendar-container{
+    @apply pl-[15px] md:pt-1 md:pb-[3px]  pt-5 pb-[17px] min-[654px]:max-w-[632.5px] max-[654px]:px-[20px] md:pr-5 w-full flex flex-col items-center justify-start  md:flex-row
+}
+.header-container{
+    @apply flex gap-[12.5px] bg-[#f0f3f5] border-b-[1px] border-[#c8ced3] w-full h-[34.59px] px-5 py-[4.8px] items-center
+}
+.card-container{
+    @apply bg-[#fff] border-[#c8ced3] rounded w-full border-[1px]
+}
+
+::ng-deep .myInput{
+    border-radius: 0.25rem 0 0  0.25rem;
+    @apply flex !justify-between flex-grow border-[1px] border-[#e4e7ea] text-[#5c6873] pl-3  w-full cursor-pointer md:min-w-[198.77px] h-[35px]
+}
+::ng-deep .myInput:focus, .active{
+    color: #5c6873 !important;
+    background-color: #fff !important;
+    border-color:1px solid #8ad4ee !important;
+    outline: none !important;
+    box-shadow: 0 0 0 .1rem rgba(32, 168, 216, .25) !important;
+}
+.input-container{
+    @apply flex relative w-full  md:max-w-[198px]
+}
+
+.calendar-icone{
+    border-radius: 0 0.25rem 0.25rem 0;
+    border: 1px solid #e4e7ea ;
+    @apply min-w-[38.25px] h-[35px] text-[#5c6873]  text-[14px] cursor-pointer bg-[#f0f3f5]  flex justify-center items-center relative right-0
+}
+.submit-btn-container{
+    @apply w-full flex justify-end pr-[1px] pt-1.5 md:justify-start md:pr-0 md:pt-1 md:pl-14 
+}
+.submit-btn{
+    transition: color  .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+
+    @apply min-h-[28.38px] max-w-[59.67px]  active:bg-black md:max-w-[61.94px]  rounded px-3 py-[2px] bg-[#00b181] border-[#00b181] text-[#fff] text-[12.25px] hover:bg-[#4dbd74] hover:border-[#4dbd74]
+     
+}

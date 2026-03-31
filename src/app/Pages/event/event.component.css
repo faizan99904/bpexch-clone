@@ -1,0 +1,50 @@
+.header-container{
+  @apply flex gap-[12.1px] bg-[#f0f3f5] !border-b-[1px] border-[#c8ced3] w-full pr-5 pl-[1.28rem] py-[4.8px]
+  h-[34.69px]  items-center
+}
+.main-container{
+  @apply rounded-[3px] bg-white border-[1px] border-[#c8ced3]
+}
+
+.table-header {
+  @apply bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}
+
+.table-row {
+  @apply px-6 py-4 whitespace-nowrap;
+}
+
+.table-container {
+  @apply shadow border-b border-gray-200 sm:rounded-lg;
+}
+
+.table-cell {
+  @apply px-6 py-4 whitespace-nowrap;
+}
+
+.status-badge {
+  @apply px-2 inline-flex text-xs leading-5 font-semibold rounded-full;
+}
+
+.status-active {
+  @apply bg-green-100 text-green-800;
+}
+
+.status-inactive {
+  @apply bg-red-100 text-red-800;
+}
+
+ .cradit-table-btn{
+    @apply bg-[#00b181] font-semibold rounded-[0.2rem] text-[14px]  whitespace-nowrap border border-[#00b181] text-[#fff] hover:bg-[#4dbd74] hover:border-[#4dbd74] flex justify-center items-center px-3 py-2
+ }
+
+ .edit-btn{
+    @apply bg-teal-700 font-semibold  px-4 rounded-[0.2rem] text-[12.25px] py-4 h-[30px] whitespace-nowrap border border-teal-700 text-[#fff] flex justify-center items-center gap-1
+ }
+
+ .input {
+  @apply w-full border rounded px-2 py-1 focus:outline-none focus:ring focus:ring-blue-300;
+}
+.table-header {
+  @apply px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+}

@@ -1,0 +1,43 @@
+.main-container{
+  @apply rounded-[3px] overflow-hidden bg-white border-[1px] border-[#c8ced3]
+}
+.header-container{
+  @apply flex gap-[12.1px] bg-[#f0f3f5] !border-b-[1px] border-[#c8ced3] w-full pr-5 pl-[1.28rem] py-[4.8px]
+  h-[34.69px]  items-center
+}
+::ng-deep .dataTables_length{
+  @apply mb-2
+}
+::ng-deep .dataTables_filter{
+  @apply mb-3
+}
+
+.cradit-table-btn{
+  @apply bg-[#00b181] font-semibold rounded-[0.2rem] text-[14px]  whitespace-nowrap text-[#fff] float-end px-3 py-1.5
+}
+.edit-btn{
+  @apply bg-[#63c2de] font-semibold  px-4 rounded-[0.2rem] text-[12.25px] py-4 h-[30px] whitespace-nowrap text-[#fff] flex justify-center items-center gap-1
+}
+
+.delete-btn {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+    border-radius: 0.2rem;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(220 38 38 / var(--tw-border-opacity, 1));
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 12.25px;
+    font-weight: 600;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}

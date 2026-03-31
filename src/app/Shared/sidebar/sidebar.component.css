@@ -1,0 +1,14 @@
+aside {
+    position: relative;
+    width: 16rem; /* Width of the sidebar */
+}
+li {
+    @apply block w-full
+}
+.svg-img {
+    @apply [filter:_invert(52%)_sepia(23%)_saturate(254%)_hue-rotate(169deg)_brightness(91%)_contrast(89%)] group-hover:[filter:_invert(100%)_sepia(0%)_saturate(0%)_hue-rotate(93deg)_brightness(103%)_contrast(103%)]
+}
+
+.svg-img-active img{
+    @apply [filter:_invert(55%)_sepia(81%)_saturate(779%)_hue-rotate(159deg)_brightness(89%)_contrast(88%)]
+}

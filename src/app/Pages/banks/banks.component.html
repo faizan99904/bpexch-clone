@@ -1,0 +1,162 @@
+<section class="overflow-y-auto pb-[50px]">
+  <div class="main-container">
+    <div class="header-container">
+      <strong>Bank Details</strong>
+    </div>
+    <div class="px-4 py-3 overflow-x-auto">
+      <button class="cradit-table-btn mb-2" (click)="openModal(false)">
+        Add Bank
+      </button>
+      <table datatable [dtOptions]="dtOptions"
+        class="table w-full whitespace-nowrap border-b border-[#dee2e6] text-[12px]">
+        <thead>
+          <tr>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Id</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">IBAN</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Account Holder</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Account Number</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Bank Name</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Is Deleted</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Limits</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Max Amount</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Status</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Image</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="banks.length > 0">
+          <tr *ngFor="let bank of banks; let i = index">
+            <td class="border-b border-[#dee2e6]">{{ i + 1 }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.IBAN}}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.accountHolderName }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.accountNumber }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.bankName }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.isDeleted }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.limits }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.maxAmount }}</td>
+            <td class="border-b border-[#dee2e6]">{{ bank.status }}</td>
+            <td class="border-b border-[#dee2e6]">
+              <div class="h-[50px] w-[50px] content-center">
+                @if(bank.image){
+                <img [src]="bank?.image" alt="bank-image" class="w-full h-full">
+                }@else{
+                ...
+                }
+              </div>
+            </td>
+            <td class="border-b border-[#dee2e6]">
+              <div class="flex items-center gap-2">
+                <button class="edit-btn" (click)="openModal(true, bank)" type="button"><i
+                    class="fas fa-edit"></i></button>
+                <button type="button" class="relative group delete-btn" (click)="confirmDelete(bank._id)">
+                  <svg class="svg-inline--fa fa-trash fa-w-14" aria-hidden="true" focusable="false" data-prefix="fas"
+                    data-icon="trash" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                    data-fa-i2svg="">
+                    <path fill="currentColor"
+                      d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="banks.length === 0">
+          <tr>
+            <td colspan="12" class="text-center">No matching records found</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal for adding/editing a bank -->
+  <div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2">
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-4 border-b">
+        <h5 class="text-lg font-semibold">{{ isEditMode ? 'Edit Bank' : 'Add Bank' }}</h5>
+        <button type="button" class="text-gray-500 hover:text-gray-700 text-2xl" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6 max-h-[70dvh] overflow-y-auto">
+        <form [formGroup]="bankForm" (ngSubmit)="onSubmit()">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Bank Name</label>
+            <input formControlName="bankName" class="form-input w-full border border-gray-300 px-3 py-2 rounded"
+              placeholder="Enter bank name" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Account Number</label>
+            <input formControlName="accountNumber" class="form-input w-full border border-gray-300 px-3 py-2 rounded"
+              placeholder="Enter account number" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Account Holder Name</label>
+            <input formControlName="accountHolderName"
+              class="form-input w-full border border-gray-300 px-3 py-2 rounded"
+              placeholder="Enter account holder name" />
+          </div>
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">IBAN</label>
+            <input formControlName="IBAN" class="form-input w-full border border-gray-300 px-3 py-2 rounded"
+              placeholder="Enter IBAN" />
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Bank Image</label>
+
+            <!-- Image preview -->
+            <div *ngIf="imagePreview" class="mb-2">
+              <img [src]="imagePreview" class="w-32 h-32 object-cover rounded border" />
+            </div>
+
+            <input type="file" accept="image/*" (change)="onImageSelect($event)"
+              class="form-input w-full border border-gray-300 px-3 py-2 rounded" />
+          </div>
+
+          <!-- Show these fields only in edit mode -->
+          <div *ngIf="isEditMode">
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Max Amount</label>
+              <input formControlName="maxAmount" class="form-input w-full border border-gray-300 px-3 py-2 rounded"
+                placeholder="Enter max amount" />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Limits</label>
+              <input formControlName="limits" class="form-input w-full border border-gray-300 px-3 py-2 rounded"
+                placeholder="Enter limits" />
+            </div>
+            <!-- Status Select Field (Only shown in Edit Mode) -->
+            <div class="mb-4" *ngIf="isEditMode">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+              <select formControlName="status" class="form-select w-full border border-gray-300 px-3 py-2 rounded">
+                <option [value]="'active'">Active</option>
+                <option [value]="'suspended'">Suspended</option>
+                <option [value]="'blocked'">Blocked</option>
+                <option [value]="'freezed'">Freezed</option>
+              </select>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+
+      <!-- Modal Footer -->
+      <div class="flex items-center justify-end p-4 border-t">
+        <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg mr-2" (click)="closeModal()">
+          Cancel
+        </button>
+        <button type="submit" class="bg-[#00b181] text-white px-4 py-2 rounded-lg" (click)="onSubmit()">
+          {{ isEditMode ? 'Update Bank' : 'Add Bank' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -1,0 +1,67 @@
+<div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+  <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2">
+    <div class="flex items-center justify-between p-4 border-b">
+      <h5 class="text-xl font-semibold">Deposit - Withdraw</h5>
+      <button type="button" class="text-gray-500 hover:text-gray-700 text-2xl" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="p-6">
+      <div class="mb-4">
+        <span class="inline-block bg-green-200 text-green-800 px-2 py-1 rounded-full">User:</span>
+        <span class="ml-2">{{ userName || 'N/A' }}</span>
+        <span class="float-right font-medium">Client Bal: {{ clientBalance || 0 | number:'1.2-2' }}</span>
+      </div>
+
+      <form [formGroup]="depositForm">
+        <!-- Amount Input -->
+        <div class="mb-4">
+          <label for="amount" class="block text-gray-700">Amount</label>
+          <input
+            type="number"
+            id="amount"
+            formControlName="amount"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="Enter amount">
+          <!-- Error message -->
+          <div *ngIf="depositForm.get('amount')?.invalid && depositForm.get('amount')?.touched" class="text-red-600">
+            <small *ngIf="depositForm.get('amount')?.errors?.['required']">Amount is required.</small>
+            <small *ngIf="depositForm.get('amount')?.errors?.['min']">Amount must be greater than 0.</small>
+          </div>
+        </div>
+
+        <!-- Remarks Input -->
+        <div class="mb-4">
+          <label for="remarks" class="block text-gray-700">Remarks</label>
+          <textarea
+            id="remarks"
+            formControlName="remarks"
+            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md"
+            placeholder="Enter remarks"></textarea>
+        </div>
+      </form>
+    </div>
+
+    <div class="flex items-center justify-end p-4 border-t">
+      <!-- Deposit Button -->
+      <button
+        type="submit"
+        class="bg-[#00b181] text-white px-4 py-2 rounded-lg mr-2 flex items-center justify-center"
+        (click)="onDeposit()"
+        [disabled]="depositForm.invalid || isDepositLoading">
+        <span *ngIf="isDepositLoading; else depositText" class="loader animate-spin h-5 w-5 border-4 border-white border-t-transparent rounded-full mr-2"></span>
+        <ng-template #depositText>Deposit</ng-template>
+      </button>
+
+      <!-- Withdraw Button -->
+      <button
+        type="submit"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg flex items-center justify-center"
+        (click)="onWithdraw()"
+        [disabled]="depositForm.invalid || isWithdrawLoading">
+        <span *ngIf="isWithdrawLoading; else withdrawText" class="loader animate-spin h-5 w-5 border-4 border-white border-t-transparent rounded-full mr-2"></span>
+        <ng-template #withdrawText>Withdraw</ng-template>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class=" flex flex-col items-center p-4 w-full">
+
+
+    <!-- Current Customer Support Details -->
+    <div class="w-full  bg-white shadow rounded-md">
+        <div class="bg-[rgb(240,243,245)] text-black font-semibold px-4 py-2 rounded-t-md">
+            Activity Logs
+        </div>
+        <div class="overflow-x-auto px-3 py-5">
+            <table class="w-full text-sm text-left border border-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 border-b font-semibold">Login Date & Time</th>
+                        <th class="px-4 py-2 border-b font-semibold">Login Status</th>
+                        <th class="px-4 py-2 border-b font-semibold">IP Address</th>
+                        <th class="px-4 py-2 border-b font-semibold">ISP</th>
+                        <th class="px-4 py-2 border-b font-semibold">City/State/Country</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let log of activityLogsList" class="border-b">
+                        <td class="px-4 py-3 text-gray-700">
+                            {{ log?.createdAt | date: 'yyyy-MM-dd, HH:mm:ss' }}
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">
+                            {{ log?.status || '-' }}
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">
+                            {{ log?.ipInfo?.ip || '-' }}
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">
+                            {{ log?.ipInfo?.org || '-' }}
+                        </td>
+                        <td class="px-4 py-3 text-gray-700">
+                            {{ log?.ipInfo?.city || '-' }}
+                            <span *ngIf="log?.ipInfo?.region">/</span>{{ log?.ipInfo?.region || '' }}
+                            <span *ngIf="log?.ipInfo?.country">/</span>{{ log?.ipInfo?.country || '' }}
+                        </td>
+                    </tr>
+                    <tr *ngIf="!activityLogsList?.length">
+                        <td colspan="5" class="text-center py-6 text-gray-500">
+                            No activity logs found.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

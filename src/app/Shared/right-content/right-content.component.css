@@ -1,0 +1,67 @@
+#Pnl-Orders {
+    @apply lg:pl-0 md:pl-[15px]
+}
+.col-md-4{
+    @apply relative w-full min-h-[1px] ;
+}
+.card-accent-primary {
+    @apply border-t-2 border-t-[#20a8d8];
+    
+}
+.card {
+    @apply mb-[1.5rem];
+}
+.card {
+    @apply relative flex flex-col min-w-0 break-words bg-white bg-clip-border border border-[#c8ced3] ;
+    border: 1px solid #c8ced3;
+    border-radius: .25rem;
+}
+.card-body {
+    @apply flex-auto p-5;
+}
+.Orders-Widget {
+    @apply max-h-[238px] overflow-y-scroll py-1.5;
+}
+.row {
+    @apply flex flex-wrap mx-[-15px];
+    
+}
+.col-4 {
+    @apply flex-none basis-[33.333333%] max-w-[33.333333%];
+}
+.no-pad {
+    @apply pl-0 pr-0;
+}
+.col-2 {
+    @apply flex-none basis-1/6 max-w-[16.666667%];
+
+}
+.card-accent-primary {
+    @apply border-t-2 border-t-[#20a8d8];
+    
+}
+.card-header {
+    @apply px-5 py-[0.3rem];
+}
+.card-header {
+    @apply mb-0 bg-[#f0f3f5] border-b border-[#c8ced3];
+}
+.card-header:first-child {
+    border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+.btn {
+    @apply inline-block font-normal text-center whitespace-nowrap align-middle select-none border border-transparent   transition-shadow duration-150 ease-in-out;
+}
+.btn-sm, .btn-group-sm>.btn {
+    @apply px-2 py-1 text-[.765625rem] leading-[1.5] rounded-[.2rem] ml-1;
+}
+.btn-primary {
+    @apply bg-[#00b181] border-[#00b181] text-[#fff];
+}
+
+@media (min-width: 768px) {
+    .col-md-4 {
+        @apply flex-[0_0_33.333333%];
+
+    }
+}

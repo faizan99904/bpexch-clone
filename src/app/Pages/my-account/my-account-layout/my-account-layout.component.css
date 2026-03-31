@@ -1,0 +1,63 @@
+.main-container {
+  @apply hidden ;
+}
+@media (min-width: 1200px) {
+  .main-container {
+    @apply block
+  }
+}
+
+.middle-div {
+  @apply fixed top-[147px] left-0 w-[240px];
+
+}
+@media (min-width: 1200px) {
+  .middle-div {
+    @apply top-[105px];
+  }
+}
+.container {
+  @apply mx-auto max-w-[1369px];
+
+}
+
+.layout {
+  @apply border  w-fit rounded px-[15px] flex items-center
+}
+.profile-header {
+  @apply text-[#243a48] text-[16px] font-black
+}
+
+.txt {
+  @apply bg-[#7e97a7] text-[#ffffff] px-[10px] text-[15px] font-black leading-[24px]
+}
+.password-txt {
+  @apply text-[#243a48] px-[10px] leading-[24px] border-b border-[#e0e6e6] whitespace-nowrap
+}
+.hash-txt {
+  @apply text-[#243a48] px-[10px] leading-[24px] border-b border-[#e0e6e6] flex items-center justify-between
+}
+.edit-txt {
+  @apply text-[#2789ce] flex items-center cursor-pointer
+}
+.ist-txt {
+  @apply text-[#243a48] px-[10px] leading-[24px] border-b border-[#e0e6e6]
+}
+.sup-btn {
+  @apply border border-[#7e97a7] w-fit rounded px-[15px] flex items-center
+}
+.sup-txt {
+  @apply bg-[#b5b562] uppercase text-[#FFFFFF] text-[10px] rounded px-1 mr-2
+}
+.menu-txt {
+  @apply px-[10px] border-b border-[#eee1c0] leading-[25px] cursor-pointer bg-[#FFFFFF] hover:bg-[rgba(238,225,192,.4)] font-semibold text-xs
+}
+.menu-txt:last-child{
+  @apply border-b-0
+}
+.details-txt {
+  @apply bg-[#243a48] text-[#FFFFFF] px-[10px] border-b border-[#eee1c0] leading-[25px] font-semibold text-xs
+}
+.selected-txt {
+  @apply px-[10px]   font-semibold text-xs border-b border-[#eee1c0] leading-[25px] cursor-pointer bg-[rgba(0,0,0,.6)] text-[#FFFFFF]
+}

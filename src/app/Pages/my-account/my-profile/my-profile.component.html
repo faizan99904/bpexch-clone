@@ -1,0 +1,14 @@
+<div *ngIf="userProfileArray.length > 0; else noData">
+  <div *ngFor="let item of userProfileArray" class="profile-item">
+    <strong>{{ item.title | titlecase }}:</strong>
+    {{
+    item.title.toLowerCase() === 'balance'
+    ? (item.value | number: '1.2-2')
+    : item.value
+    }}
+  </div>
+</div>
+
+<ng-template #noData>
+  <p>No profile data available.</p>
+</ng-template>

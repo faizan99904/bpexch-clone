@@ -1,0 +1,51 @@
+<div class="card-container">
+    <div class="header-container">
+        <i class="fa fa-filter" aria-hidden="true"></i>
+        <strong>Report
+            Filter</strong>
+    </div>
+
+    <div class="calendar-container">
+     
+
+<div class="input-container">
+
+        <input type="text" name="datetime-local" id="datetime-local" #datePickerInput
+        
+        class="myInput">
+  
+    <div 
+    (click)="togleDateTimePicker()"
+    class="calendar-icone">
+    <i class="fa fa-calendar"></i></div>
+</div> 
+   <div class="md:pt-5"
+   ><strong class="w-[15px] h-full m-auto pl-[3.7rem] pr-[92px] ">&nbsp;-&nbsp;</strong>
+</div> 
+
+    <div class="input-container ">
+
+        <input type="text" name="datetime-local" id="datetime-local" #datePickerInputSecond
+        
+        class="myInput" >
+  
+    <div 
+    (click)="  togleSecondDateTimePicker()"
+    class="calendar-icone">
+    <i class="fa fa-calendar"></i></div>
+    </div> 
+ 
+    <div class="submit-btn-container"    [ngClass]="{
+        'btn-clicked': isButtonTwoClicked,
+        'btn-hover-active': !isButtonTwoClicked
+      }"
+     (mousedown)="onMouseDown('buttonTwo')"
+     (mouseup)="onMouseUp('buttonTwo')"
+     (touchstart)="onMouseDown('buttonTwo')"
+     (touchend)="onMouseUp('buttonTwo')">
+        <button class="submit-btn">
+        Submit
+    </button></div>
+</div>
+
+</div>

@@ -1,0 +1,70 @@
+
+<section class="overflow-y-auto overflow-x-auto h-[85vh]">
+  <div class="main-container">
+    <div class="table-container">
+      <div class="btn-wrapper">
+      <button class="btn btn-primary my-4" (click)="toggleModal(true)">Add Multiplayer</button>
+      </div>
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead>
+        <tr>
+          <th scope="col" class="table-header">Min</th>
+          <th scope="col" class="table-header">Max</th>
+          <th scope="col" class="table-header">Probability</th>
+          <th scope="col" class="table-header">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+        <!-- Table rows -->
+        <tr *ngFor="let user of multiplayer; let i = index">
+          <td class="table-cell">{{ user.min }}</td>
+          <td class="table-cell">{{ user.max }}</td>
+          <td class="table-cell">{{ user.probability }}</td>
+          <td class="table-cell">
+            <button class="bg-red-500 rounded-sm text-white px-4 py-1.5" (click)="onDeleteMultiplier(user._id)">Delete</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="showModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full px-4 py-20">
+    <div class="flex justify-center items-center h-full">
+      <div class="bg-white p-5 rounded-lg max-w-sm mx-auto w-full">
+        <form class="space-y-4" (ngSubmit)="submitMultiplayer()">
+          <div>
+            <label for="min" class="block text-sm font-medium text-gray-700">Min</label>
+            <input id="min" type="number" [(ngModel)]="multiplayerSettings.min" name="min"
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm"
+                   placeholder="Enter minimum value">
+          </div>
+          <div>
+            <label for="max" class="block text-sm font-medium text-gray-700">Max</label>
+            <input id="max" type="number" [(ngModel)]="multiplayerSettings.max" name="max"
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm"
+                   placeholder="Enter maximum value">
+          </div>
+          <div>
+            <label for="probability" class="block text-sm font-medium text-gray-700">Probability (%)</label>
+            <input id="probability" type="number" [(ngModel)]="multiplayerSettings.probability" name="probability"
+                   class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none  sm:text-sm"
+                   placeholder="Enter probability">
+          </div>
+          <div class="flex justify-end items-center pt-4">
+            <button type="submit"
+                    class="inline-flex justify-center py-2 px-4 border mr-2 border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#00b181] focus:outline-none focus:ring-2">
+              Add
+            </button>
+            <button type="button" (click)="toggleModal(false)"
+                    class="inline-flex justify-center py-2 px-4 text-sm font-medium rounded-md text-white bg-red-500">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+

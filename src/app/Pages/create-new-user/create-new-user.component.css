@@ -1,0 +1,259 @@
+.custom-focus:focus {
+    box-shadow: 0 0 0 .2rem rgba(32, 168, 216, 0.25);
+    outline: none;
+  }
+  input{
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+
+
+  input:-webkit-autofill {
+  /* -webkit-background-clip: text;  */
+  background-clip: text;
+    -webkit-text-fill-color: black;
+}
+
+
+ .main-heading {
+  @apply h-[34px] w-full text-[1rem] font-bold bg-[#f0f3f5] py-[0.3rem] border-b-[1px] border-[#c8ced3] px-[1.25rem]  leading-[1.5] text-[#23282c];
+ }
+ .validations{
+  @apply p-[1.25rem] bg-[#fff]
+ }
+ .first-validation{
+  @apply text-[#f86c6b] leading-[1.5] list-disc pl-[40px]
+ }
+ .main{
+  @apply w-[100%] mt-[15px] md:w-[75%]
+ }
+ .main-username{
+  @apply flex flex-col md:w-full  md:!flex-row mb-[15px]
+ }
+ .heading-username{
+  @apply py-[7px] md:w-[25%]
+ }
+ .inputs{
+  @apply border-[1px] py-[.375rem]  custom-focus rounded-[.25rem] focus:border-[#8ad4ee]  focus:border-[1px]   outline-[0]   px-[.75rem] text-[#5c6873]     border-[#e4e7ea] w-full h-[35px]
+ }
+ .password{
+  @apply flex flex-col md:w-full md:!flex-row mt-[16px]
+ }
+ .password-heading{
+  @apply py-[7px] md:w-[25%]
+ }
+ .main-type{
+  @apply flex md:items-center flex-col md:mt-[16px] mt-[16px] md:w-full md:!flex-row
+ }
+ .type-heading{
+  @apply py-[7px] md:pt-[8px] md:pb-[7px] md:w-[25%]
+ }
+ .main-radio{
+  @apply flex md:pb-3 md:ml-1
+ }
+ .super-master{
+  @apply flex flex-row-reverse  md:pl-[1px] justify-end
+ }
+ .radio-input{
+  @apply rounded-[.25rem] py-[.375rem]  px-[.75rem] text-[#5c6873] outline-none
+ }
+ .phone{
+  @apply flex flex-col   md:flex-row md:pt-[16px]   pt-[6px]
+ }
+ .phone-heading{
+  @apply pb-[6px] pt-[6px] md:py-[1px] md:w-[25%]
+ }
+ .phone-input{
+  @apply border-[1px] focus:border-[#8ad4ee]  focus:border-[1px] custom-focus py-[4px] px-[.75rem] text-[#5c6873] outline-none  rounded-[.25rem] border-[#e4e7ea] w-full h-[35px]
+ }
+ .referance{
+  @apply flex flex-col md:flex-row md:pt-[16px]  pt-[12px]
+ }
+ .referance-heading{
+  @apply pb-[7px] pt-[12px] md:py-[4px] md:w-[25%]
+ }
+ .referance-input{
+  @apply border-[1px] py-[.375rem] focus:border-[#8ad4ee]  focus:border-[1px] custom-focus px-[.75rem] text-[#5c6873] outline-none  rounded-[.25rem] border-[#e4e7ea] w-full h-[35px]
+ }
+.child-input{
+  @apply md:w-[75%]  md:ml-2
+}
+.notes{
+  @apply flex flex-col  md:flex-row  md:pt-[14px]  pt-[16px] pb-3
+}
+.notes-heading{
+  @apply pb-[7px] pt-[7px] md:py-[9px] md:w-[25%]
+}
+.textarea{
+  @apply border-[1px] outline-none focus:border-[#8ad4ee]  focus:border-[1px] custom-focus rounded-md border-[#e4e7ea] w-full h-[61px]
+}
+.main-btn{
+  @apply h-[53px] bg-[#f0f3f5]  px-[1.25rem] py-[.75rem] md:pt-[14px]
+}
+.submit-btn{
+  @apply bg-[#00b181] h-[27px] w-[58px] rounded-sm text-white text-[.765625rem]
+}
+.main-checkbox{
+  @apply flex flex-col mt-[18px]    md:!flex-row
+}
+.checkbox-heading{
+  @apply py-[7px] md:py-[6px] md:w-[25%]
+}
+.checkbox{
+  @apply md:mb-[1.25rem] py-[.375rem] focus:border-[#8ad4ee]  focus:border-[1px] custom-focus px-[.75rem] text-[#5c6873] outline-none  md:ml-[5px]
+}
+.child-checkbox{
+  @apply flex flex-row-reverse  pt-[10px] justify-end
+}
+.downline-input{
+  @apply border-[1px] outline-none  focus:border-[#8ad4ee]  focus:border-[1px] custom-focus border-[#e4e7ea] rounded-[.25rem] w-[33%] h-[35px] py-[.375rem] text-[#5c6873] px-[.75rem]
+}
+.bettor{
+  @apply flex flex-row-reverse justify-end px-[8px]
+}
+.txt{
+  @apply pl-[6px]
+}
+.downline-share{
+ @apply flex flex-col md:w-full md:!flex-row mt-[16px]
+}
+.downline-heading{
+  @apply py-[7px] md:w-[25%]
+}
+.span{
+  @apply bg-[#ffc0cb] font-bold
+}
+.number-heading{
+  @apply md:pl-[6px] md:w-[75%]
+}
+.main-input-child{
+  @apply md:w-[75%]  md:ml-2
+}
+.radius{
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+.main-parent{@apply  border-[1px] border-[#c8ced3] rounded-[.25rem]}
+
+  .scnd-radius{
+
+    @apply border-[#c8ced3] border-t rounded-[0_0_calc(0.25rem_-_1px)_calc(0.25rem_-_1px)]
+  }
+
+ .validations{
+  @apply p-[1.25rem] bg-[#fff]
+ }
+
+ .error{
+   @apply text-danger
+ }
+ .first-validation{
+  @apply text-[#f86c6b] leading-[1.5] list-disc pl-[40px]
+ }
+ .main{
+  @apply w-[100%] mt-[15px] md:w-[75%]
+ }
+ .main-username{
+  @apply flex flex-col md:w-full  md:!flex-row
+ }
+ .heading-username{
+  @apply py-[7px] md:w-[25%]
+ }
+ .inputs{
+  @apply border-[1px] py-[.375rem]  custom-focus rounded-[.25rem] focus:border-[#8ad4ee]  focus:border-[1px]   outline-[0]   px-[.75rem] text-[#5c6873]     border-[#e4e7ea] w-full h-[35px]
+ }
+ .password{
+  @apply flex flex-col md:w-full md:!flex-row mt-[16px]
+ }
+ .password-heading{
+  @apply py-[7px] md:w-[25%]
+ }
+ .main-type{
+  @apply flex md:items-center flex-col md:mt-[16px] mt-[16px] md:w-full md:!flex-row
+ }
+ .type-heading{
+  @apply py-[7px] md:pt-[8px] md:pb-[7px] md:w-[25%]
+ }
+ .main-radio{
+  @apply flex md:pb-3 md:ml-1
+ }
+ .super-master{
+  @apply flex flex-row-reverse  md:pl-[1px] justify-end
+ }
+ .radio-input{
+  @apply rounded-[.25rem] py-[.375rem]  px-[.75rem] text-[#5c6873] outline-none
+ }
+ .phone{
+  @apply flex flex-col   md:flex-row md:pt-[16px]   pt-[6px]
+ }
+ .phone-heading{
+  @apply pb-[6px] pt-[6px] md:py-[1px] md:w-[25%]
+ }
+ .phone-input{
+  @apply border-[1px] focus:border-[#8ad4ee]  focus:border-[1px] custom-focus py-[4px] px-[.75rem] text-[#5c6873] outline-none  rounded-[.25rem] border-[#e4e7ea] w-full h-[35px]
+ }
+ .referance{
+  @apply flex flex-col md:flex-row md:pt-[16px]  pt-[12px]
+ }
+ .referance-heading{
+  @apply pb-[7px] pt-[12px] md:py-[4px] md:w-[25%]
+ }
+ .referance-input{
+  @apply border-[1px] py-[.375rem] focus:border-[#8ad4ee]  focus:border-[1px] custom-focus px-[.75rem] text-[#5c6873] outline-none  rounded-[.25rem] border-[#e4e7ea] w-full h-[35px]
+ }
+.child-input{
+  @apply md:w-[75%]  md:ml-2
+}
+.notes{
+  @apply flex flex-col  md:flex-row  md:pt-[14px]  pt-[16px] pb-3
+}
+.notes-heading{
+  @apply pb-[7px] pt-[7px] md:py-[9px] md:w-[25%]
+}
+.textarea{
+  @apply border-[1px] outline-none focus:border-[#8ad4ee]  focus:border-[1px] custom-focus rounded-md border-[#e4e7ea] w-full h-[61px]
+}
+.main-btn{
+  @apply h-[53px] bg-[#f0f3f5] px-[1.25rem] py-[.75rem] md:pt-[14px]
+}
+.submit-btn{
+  @apply bg-[#00b181] h-[27px] w-[58px] rounded-sm text-white text-[.765625rem]
+}
+.main-checkbox{
+  @apply flex flex-col mt-[18px]    md:!flex-row
+}
+.checkbox-heading{
+  @apply py-[7px] md:py-[6px] md:w-[25%]
+}
+.checkbox{
+  @apply md:mb-[1.25rem] py-[.375rem] focus:border-[#8ad4ee]  focus:border-[1px] custom-focus px-[.75rem] text-[#5c6873] outline-none  md:ml-[5px]
+}
+.child-checkbox{
+  @apply flex flex-row-reverse  pt-[10px] justify-end
+}
+.downline-input{
+  @apply border-[1px] outline-none  focus:border-[#8ad4ee]  focus:border-[1px] custom-focus border-[#e4e7ea] rounded-[.25rem] w-[33%] h-[35px] py-[.375rem] text-[#5c6873] px-[.75rem]
+}
+.bettor{
+  @apply flex flex-row-reverse justify-end px-[8px]
+}
+.txt{
+  @apply pl-[6px]
+}
+.downline-share{
+ @apply flex flex-col md:w-full md:!flex-row mt-[16px]
+}
+.downline-heading{
+  @apply py-[7px] md:w-[25%]
+}
+.span{
+  @apply bg-[#ffc0cb] font-bold
+}
+.number-heading{
+  @apply md:pl-[6px] md:w-[75%]
+}
+.main-input-child{
+  @apply md:w-[75%]
+}
+
+.eye-icons{
+  @apply text-white absolute right-1 top-[7px];
+}

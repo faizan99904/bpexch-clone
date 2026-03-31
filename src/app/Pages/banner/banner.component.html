@@ -1,0 +1,176 @@
+<section class="overflow-y-auto h-[85vh]">
+    <div class="main-container">
+        <div class="flex justify-end mr-4 mb-3"><button class="cradit-table-btn mt-3" (click)="openModal()"> Add Event
+            </button></div>
+        <div class="table-container overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 whitespace-nowrap">
+                <thead>
+                    <tr>
+                        <th class="table-header">eventId</th>
+                        <th class="table-header">Sequence</th>
+                        <th class="table-header">Desktop Image</th>
+                        <th class="table-header">Mobile Image</th>
+                        <th class="table-header">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody class="bg-white divide-y divide-gray-200">
+                    <tr *ngFor="let event of eventList; let i = index">
+                        <td>{{ event.eventId }}</td>
+
+
+
+                        <td>
+                            <select [(ngModel)]="event.sequence" #sequence
+                                (change)="updateSequence(sequence.value, event)"
+                                class="w-full border border-gray-300 min-w-[50px] rounded px-3 py-2 focus:outline-none">
+                                <option [value]="num" *ngFor="let num of numbers">{{num}}</option>
+
+                            </select>
+                        </td>
+
+                        <td>
+                            <div class="flex w-full justify-center"><img [src]="event.image" alt="Event Logo"
+                                    class="h-10 w-20 rounded object-cover border" /></div>
+                        </td>
+
+                        <td>
+                            <div class="flex w-full justify-center"><img [src]="event.mobileImage" alt="Mobile Image"
+                                    class="h-10 w-20 rounded object-cover border" /></div>
+                        </td>
+
+                        <td>
+                            <div class="flex justify-center items-center gap-3">
+                                <div class="flex">
+                                    <button type="button" class="relative group edit-btn" (click)="openModal(event)">
+                                        <svg class="svg-inline--fa fa-edit fa-w-18" aria-hidden="true" focusable="false"
+                                            data-prefix="fas" data-icon="edit" role="img"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                            <path fill="currentColor"
+                                                d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+
+                                <button class="relative group delete-btn" type="button"
+                                    (click)="openDeleteModal(event)">
+                                    <i class="fas fa-trash"></i>
+
+                                </button>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+</section>
+
+<div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-3xl p-6 relative">
+        <button (click)="closeModal()"
+            class="absolute top-2 right-3 text-gray-600 hover:text-black text-xl">&times;</button>
+        <h3 class="text-xl font-semibold mb-4">{{ isEdit ? 'Edit Event' : 'Add Event' }}</h3>
+
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Event ID -->
+                <div>
+                    <label class="block text-sm font-medium mb-1">Event ID</label>
+                    <input type="text" formControlName="eventId"
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+                </div>
+
+
+                <!-- Sequence -->
+                <div>
+                    <label class="block text-sm font-medium mb-1">Sequence</label>
+                    <input type="number" formControlName="sequence"
+                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+                </div>
+
+
+
+
+                <!-- Image (Styled file input) -->
+                <div>
+                    <label class="block text-sm font-medium mb-1">Image</label>
+                    <label
+                        class="w-full flex flex-col items-center px-3 py-2 border border-gray-300 rounded cursor-pointer bg-gray-50 hover:bg-gray-100 text-gray-600">
+                        <span>Select Image</span>
+                        <input type="file" class="hidden" (change)="onFileChange($event, 'image')" />
+                    </label>
+                    <div *ngIf="previewImage" class="mt-2">
+                        <img [src]="previewImage" class="h-12 rounded" />
+                    </div>
+                </div>
+
+
+
+
+                <div>
+                    <label class="block text-sm font-medium mb-1">Mobile Image</label>
+                    <label
+                        class="w-full flex flex-col items-center px-3 py-2 border border-gray-300 rounded cursor-pointer bg-gray-50 hover:bg-gray-100 text-gray-600">
+                        <span>Select Mobile Image</span>
+                        <input type="file" class="hidden" (change)="onFileChange($event, 'mobileImage')" />
+                    </label>
+                    <div *ngIf="previewMobileImage" class="mt-2">
+                        <img [src]="previewMobileImage" class="h-12 rounded" />
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end space-x-2 pt-4">
+                <button type="button"
+                    class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 cursor-pointer"
+                    (click)="closeModal()">Cancel</button>
+                <button type="submit" [disabled]="eventForm.invalid"
+                    class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+                    {{ isEdit ? 'Update' : 'Create' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50" *ngIf="isDelete"
+    (click)="isDelete = false">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2" (click)="$event.stopPropagation()">
+
+        <div class="flex items-center justify-between p-4 border-b">
+            <h5 class="text-lg font-semibold">Confirm Delete</h5>
+            <button type="button" class="text-gray-500 hover:text-gray-700 text-2xl" (click)="isDelete = false">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+
+        <div class="p-6">
+            <p class="text-gray-700 flex items-center flex-wrap w-full gap-2">Are you sure you want to delete Banner
+                <span class="font-semibold">
+                    <div class="flex w-full justify-center"><img [src]="deleteId.image" alt="Event Logo"
+                            class="h-10 w-10 rounded object-cover border" /></div>
+                </span> ?
+            </p>
+        </div>
+
+
+        <div class="flex items-center justify-end p-4 border-t">
+            <button type="button" class="bg-red-500 text-white px-4 py-2 rounded-lg mr-2" (click)="isDelete = false">
+                Cancel
+            </button>
+            <button type="button" class="bg-[#00b181] text-white px-4 py-2 rounded-lg" (click)="deleteBanner()">
+                Confirm
+            </button>
+        </div>
+    </div>
+</div>

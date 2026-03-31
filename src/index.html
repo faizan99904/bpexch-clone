@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Admin Panel</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <app-root></app-root>
+  <script defer>
+    document.addEventListener("gesturestart", function (e) {
+      e.preventDefault();
+    });
+    document.addEventListener(
+      "touchmove",
+      function (event) {
+        event.preventDefault();
+      },
+      false
+    );
+
+    document.addEventListener(
+      "dblclick",
+      function (event) {
+        event.preventDefault();
+      },
+      { passive: false }
+    );
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+.report-btn{
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+@apply border-[1px]  font-normal rounded leading-[1.5] text-[14px] px-[12px] py-[0.375rem] text-center  whitespace-nowrap  ;
+}
+.btn-container{
+    @apply px-[19px] py-[19px] flex items-center gap-x-1 flex-wrap justify-center min-[636px]:justify-start border-[1px]
+}
+.header-container{
+    @apply flex gap-[12.5px] bg-[#f0f3f5] border-b-[1px] border-[#c8ced3] w-full h-[34.59px] px-5 py-[4.8px] items-center
+}
+.card-container{
+    @apply bg-[#fff] border-[#c8ced3] rounded w-full border-[1px] 
+}
+.layout-main-container{
+    @apply flex flex-col w-full h-screen  !overflow-y-auto bg-[#e4e5e6]
+}
+.marquee-container{
+    @apply bg-[#f0f3f5] h-[50px] absolute bottom-0 w-full flex justify-center items-center text-[12px] 
+}
+.scroll-layout{
+    @apply  flex flex-row w-full mt-[55px] 
+}

@@ -1,0 +1,36 @@
+<div class="flex flex-col fixed z-20 top-0 left-0 w-[200px] duration-300 transition-transform transform" [ngClass]="{
+'md:!w-[50px] !duration-300 !transition-all' : slimSidebar,
+}" [class.-translate-x-full]="!isOpen" [class.translate-x-0]="isOpen">
+    <div class="lg:h-[calc(100vh-50px)] h-screen overflow-y-scroll pt-[55px] bg-[#2F353B] text-white">
+        <ul class="flex flex-col justify-start items-start ">
+            @for (item of sidebarItems; track $index) {
+              <li *ngIf="item.visible !== false" [ngClass]="{'bg-[#3a4248] text-white svg-img-active': isActive(item)}">
+                <a [routerLink]="item.link" (click)="closeSidebar()"
+                    class="py-3 px-4 w-full leading-[1.5] flex items-center hover:bg-[#1FA9D9] cursor-pointer group">
+                    <div class="w-[1.0193rem] mr-[13.5px]" [ngClass]="{
+                        '!w-[50px] h-[24px] !mr-0' : slimSidebar
+                    }">
+                        <img [src]="item.img" class="h-[16px] w-[18px] svg-img" [ngClass]="{
+                            'h-[18.5px] max-w-[22.5px]' : slimSidebar,
+                        }" alt="images">
+                    </div>
+                    <h2 [ngClass]="{
+                        'hidden' : slimSidebar
+                    }"> {{item.heading}}</h2>
+                </a>
+            </li>
+            }
+
+        </ul>
+    </div>
+    <div class=" lg:h-[50px] hidden bg-[#252A2E] w-full lg:flex justify-end items-center cursor-pointer group"
+        (click)="sidebarSlim()">
+        <img src="/assets/sidebar/arrow.svg" [ngClass]="{
+            'rotate-180 transition-all duration-300' : slimSidebar
+        }" class="w-[12.5px] mr-[19px] [filter:_invert(53%)_sepia(29%)_saturate(223%)_hue-rotate(169deg)_brightness(88%)_contrast(84%)]  group-hover:[filter:_invert(93%)_sepia(100%)_saturate(2%)_hue-rotate(184deg)_brightness(106%)_contrast(100%)]"
+            alt="arrow">
+    </div>
+</div>
+@if (isOpen) {
+<div class="max-md:fixed max-md:inset-0 z-10 bg-black/50 md:invisible" (click)="onOverlayClick($event)"></div>
+}

@@ -1,0 +1,13 @@
+<div class="h-[85vh] overflow-y-auto max-lg:mb-2.5">
+  <div class="container-fluid mx-auto px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div *ngFor="let card of cards"
+        class="bg-white p-8 shadow rounded-lg flex flex-col justify-between cursor-pointer">
+        <h2 class="text-2xl font-semibold">{{ card.title }}</h2>
+        <p class="text-lg font-bold"
+          [ngClass]="{'text-green-500': card.title === 'Total Profit/Loss' && card.count >= 0, 'text-red-500': card.title === 'Total Profit/Loss' && card.count < 0 }">
+          {{ getInteger(card.count) }}</p>
+      </div>
+    </div>
+  </div>
+</div>

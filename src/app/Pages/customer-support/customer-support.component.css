@@ -1,0 +1,7 @@
+.delete-btn{
+    @apply bg-red-600 font-semibold  px-4 rounded-[0.2rem] text-[12.25px] py-4 h-[30px] whitespace-nowrap border border-red-600 text-[#fff]  flex justify-center items-center gap-1
+ }
+
+.edit-btn{
+    @apply bg-teal-700 font-semibold  px-4 rounded-[0.2rem] text-[12.25px] py-4 h-[30px] whitespace-nowrap border border-teal-700 text-[#fff] flex justify-center items-center gap-1
+ }

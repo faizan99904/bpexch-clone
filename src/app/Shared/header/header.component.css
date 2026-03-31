@@ -1,0 +1,31 @@
+header{
+    @apply fixed z-50 cursor-pointer w-full flex flex-row flex-wrap items-center justify-between p-0 m-0 bg-[#fff] h-[55px] border-b border-solid border-[#c8ced3]
+}
+.sidebar-toggle{
+@apply cursor-pointer min-w-[50px] py-1 leading-[17.5px] text-center mr-auto lg:mr-0
+}
+.sidebar-toggle img{
+    @apply h-[23px] inline-block 
+}
+.sm-toggle{
+    @apply hidden sm:block lg:hidden
+}
+.links-list{
+    @apply  flex-row items-center list-none mb-0 hidden lg:flex
+}
+.list-item{
+    @apply  relative min-w-[50px] text-center
+}
+.links{
+    @apply text-[#73818f] block hover:text-black
+}
+.dropdown{
+    @apply absolute z-[1000] float-left text-left hidden list-none overflow-hidden rounded-[.25rem] border border-solid border-[#c8ced3] bg-white bg-clip-padding text-base shadow-lg data-[twe-dropdown-show]:block m-[.125rem_0_0]
+}
+.dropdown-item{
+    @apply block w-full whitespace-nowrap  min-w-[11.3rem] bg-white px-5 py-2.5 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline border-b border-[#c8ced3] h-[41px]
+}
+.fa-user,.fa-logout{
+    @apply inline-block w-5 mr-2.5 -ml-2.5 text-[#c8ced3] text-center
+}
+

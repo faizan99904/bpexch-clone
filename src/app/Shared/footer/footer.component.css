@@ -1,0 +1,23 @@
+footer{
+    @apply w-full h-[50px] flex flex-wrap items-center pl-4 text-[#23282c] bg-[#f0f3f5] border-t border-solid border-[#c8ced3] 
+}
+.ticker-container{
+    @apply h-[25px] overflow-hidden text-[#23282c]
+} 
+.ticker-container {
+    @apply w-[480px] overflow-hidden whitespace-nowrap box-border
+  }
+
+  .ticker-list {
+    @apply flex flex-row justify-center my-auto;
+    animation: ticker-scroll 15s linear infinite;
+  }
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }

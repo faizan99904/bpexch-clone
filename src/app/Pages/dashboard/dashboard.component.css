@@ -1,0 +1,7 @@
+.cradit-table-btn{
+    @apply bg-[#00b181] absolute right-3 bottom-5 font-semibold rounded-[0.2rem] text-[14px]  whitespace-nowrap border border-[#00b181] text-[#fff] hover:bg-[#4dbd74] hover:border-[#4dbd74] flex justify-center items-center px-3 py-2
+ }
+
+ .status-dropdown {
+   @apply absolute top-3 right-3 border rounded  outline-none
+ }

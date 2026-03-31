@@ -1,0 +1,158 @@
+.wrapper {
+  background-image: url("/assets/login-page/bg-diamonds2.png");
+  @apply bg-no-repeat h-[100vh] bg-center bg-cover z-10 flex flex-col items-center justify-between w-full overflow-hidden mx-auto;
+}
+
+.login-container {
+  @apply lg:max-lg:mt-[15.4rem] h-[100vh] z-[1] flex w-full flex-wrap items-center overflow-hidden justify-center p-[15px]
+}
+
+.login-wrapper {
+  @apply p-[55px_55px_37px] bg-gradient-to-b from-[#3e6d8d] to-[#121d30] w-[400px] xl:!pb-[38px] md:mb-[10%] left-0 overflow-hidden rounded-[10px]
+}
+
+.login-logo {
+  @apply mb-[30px] flex justify-center text-[35px] text-white
+}
+
+.input-wrapper {
+  @apply w-full relative mb-[30px]
+}
+
+.eye-icons{
+  @apply text-white absolute right-0 top-[17px];
+}
+
+.login-form-btn {
+  @apply flex flex-wrap justify-center w-full
+}
+
+.input-wrapper:nth-of-type(1) {
+  @apply mb-[32px]
+}
+
+.input-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-bottom: 2px solid white;
+  transform-origin: left;
+  scale: 0 1;
+  transition: scale 0.35s ease-in-out;
+}
+
+.input-wrapper:has(input:focus)::after {
+  scale: 1 1;
+}
+
+input {
+  @apply text-base font-normal text-white leading-[1.2] block w-full h-[46px] bg-transparent px-[5px] pl-[38px] outline-none border-none border-b-2 border-white/25;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.24);
+}
+
+input::placeholder {
+  @apply text-[#fff]
+}
+
+input:focus::placeholder {
+  @apply text-transparent
+}
+
+.input-focus {
+  @apply absolute flex w-full h-full -top-[3px] left-0 pointer-events-none;
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus+.input-focus {
+  @apply top-[-30px]
+}
+
+input+.input-focus img {
+  transition: all 0.3s ease-in-out;
+}
+
+input:focus+.input-focus img {
+  @apply w-[17px]
+}
+
+.login-btn {
+  @apply  bg-gradient-to-b from-[#87bbdd] to-[#072336] shadow-[0_8px_16px_0_rgba(0,0,0,0.2),0_6px_20px_0_rgba(0,0,0,0.6)] hover:bg-gradient-to-b hover:from-[#3e6d8d] hover:to-[#121d30] relative text-white flex h-[49.8px] min-w-[120px] items-center justify-center rounded-[25px] text-base font-medium leading-[1.2] transition-all duration-500 hover:text-white;
+
+}
+
+/* -------login footer styles -------- start ----- */
+#sticky-footer {
+  @apply h-[49px];
+  flex-shrink: unset;
+}
+
+.bffooter {
+  @apply w-[135px] h-[30px]
+}
+
+.curasaoLinks {
+  @apply pointer-events-none cursor-default mt-[10px] ml-[9px]
+}
+
+.footer-img-wrapper {
+  @apply absolute left-[50%];
+  transform: translateX(-50%);
+}
+
+@media (max-width: 676px) {
+  .login-wrapper {
+    padding: 55px 15px 37px;
+  }
+
+  .input-wrapper:nth-of-type(1) {
+    margin-bottom: 32px !important;
+  }
+}
+
+@media (max-width: 667px) {
+  .login-wrapper {
+    margin-bottom: 12.1%;
+  }
+
+  #sticky-footer {
+    @apply block;
+    position: unset;
+  }
+
+  .curasaoLinks {
+    @apply ml-[1.5rem]
+  }
+}
+
+@media screen and (max-width: 635px) {
+
+  .bffooter {
+    @apply w-full h-[30px]
+  }
+
+  .curasaoLinks {
+    @apply mt-[10px] ml-0
+  }
+  #sticky-footer {
+    flex-shrink: unset;
+
+  }
+}
+
+.footer {
+  @apply fixed bottom-0 mt-[130px] bg-[#333] text-[rgba(255,255,255,.5)]
+}
+.divider{
+  @apply w-1/4 m-auto  rounded border-b border-[#d5d3d3]
+}
+@media (min-width:1380px) {
+  .divider{
+    @apply border-none
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: white;
+}

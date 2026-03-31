@@ -1,0 +1,146 @@
+<!-- Profile Component starts -->
+<main class="md:max-lg:mb-[46px]">
+  <div class="lg:flex">
+    <div class="w-full px-[15px] ">
+      <!-- Profile  -->
+      <div class="profile-container">
+        <div class="profile-header">
+          <span class="mt-[0.5px] font-bold">Add Bank Account</span>
+        </div>
+        <!-- Stake fields -->
+        <form [formGroup]="bankForm" (ngSubmit)="onSubmit()" class="profile-form" novalidate>
+          <div class="mb-4 w-full sm:flex">
+            <div class="field-label">
+              <label for="username">Username</label>
+            </div>
+            <div class="w-full sm:px-[15px]">
+              <input formControlName="username" type="text" class="field-input" id="username" />
+              <div
+                *ngIf="bankForm.get('username')?.errors && (bankForm.get('username')?.touched || bankForm.get('username')?.dirty)"
+                class="text-red-500">
+                <small *ngIf="bankForm.get('username')?.errors?.['required']">Username is required.</small>
+                <small *ngIf="bankForm.get('username')?.errors?.['minlength']">Username must be at least 3 characters
+                  long.</small>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 w-full sm:flex">
+            <div class="field-label">
+              <label for="iban">IBAN</label>
+            </div>
+            <div class="w-full sm:px-[15px]">
+              <input formControlName="iban" type="text" class="field-input" id="iban" />
+              <div
+                *ngIf="bankForm.get('iban')?.errors && (bankForm.get('iban')?.touched || bankForm.get('iban')?.dirty)"
+                class="text-red-500">
+                <small *ngIf="bankForm.get('iban')?.errors?.['required']">IBAN is required.</small>
+                <small *ngIf="bankForm.get('iban')?.errors?.['pattern']">IBAN format is invalid.</small>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4 w-full sm:flex">
+            <div class="field-label">
+              <label for="bankName">Bank Name</label>
+            </div>
+            <div class="w-full sm:px-[15px]">
+              <input formControlName="bankName" type="text" class="field-input" id="bankName" />
+              <div
+                *ngIf="bankForm.get('bankName')?.errors && (bankForm.get('bankName')?.touched || bankForm.get('bankName')?.dirty)"
+                class="text-red-500">
+                <small *ngIf="bankForm.get('bankName')?.errors?.['required']">Bank name is required.</small>
+              </div>
+            </div>
+          </div>
+          <div class="flex w-full gap-[3.5px]">
+            <button type="submit" class="save-changes bg-[#00b181] hover:bg-[#4dbd74]" id="submit"
+              [disabled]="bankForm.invalid">
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- Change Password -->
+      <div class="password-header my-6">
+        <div class="border border-solid border-[#c8ced3]">
+          <div class="change-pw">
+            <span class="mt-[0.5px] text-base font-bold">Change Password</span>
+          </div>
+          <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="pw-form" novalidate>
+            <div class="lg:mb-[16.5px] sm:mb-4 mb-4 w-full sm:flex">
+              <div class="pw-text">
+                <label for="currentPassword">Current Password</label>
+              </div>
+              <div class="w-full sm:px-[15px]">
+                <input type="password" formControlName="currentPassword" class="new-password" id="currentPassword" />
+                <div
+                  *ngIf="passwordForm.get('currentPassword')?.invalid && (passwordForm.get('currentPassword')?.touched || passwordForm.get('currentPassword')?.dirty)"
+                  class="text-red-500">
+                  <small *ngIf="passwordForm.get('currentPassword')?.errors?.['required']">Current password is
+                    required.</small>
+                  <small *ngIf="passwordForm.get('currentPassword')?.errors?.['minlength']">Current password must be at
+                    least 8 characters long.</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:mb-[16.5px] sm:mb-4 mb-4 w-full sm:flex">
+              <div class="pw-text">
+                <label for="newPassword">New Password</label>
+              </div>
+              <div class="w-full sm:px-[15px]">
+                <input type="password" formControlName="newPassword" class="new-password" id="newPassword" />
+                <div
+                  *ngIf="passwordForm.get('newPassword')?.invalid && (passwordForm.get('newPassword')?.touched || passwordForm.get('newPassword')?.dirty)"
+                  class="text-red-500">
+                  <small *ngIf="passwordForm.get('newPassword')?.errors?.['required']">New password is required.</small>
+                  <small *ngIf="passwordForm.get('newPassword')?.errors?.['minlength']">New password must be at least 8
+                    characters long.</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex w-full gap-[3.5px]">
+              <button type="submit" class="update bg-[#00b181] hover:bg-[#4dbd74]" id="changeSubmit"
+                [disabled]="passwordForm.invalid">
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Welcome Bonus -->
+      <div class="password-header my-6">
+        <div class="border border-solid border-[#c8ced3]">
+
+          <div class="change-pw">
+            <span class="mt-[0.5px] text-base font-bold">Welcome Bonus</span>
+          </div>
+
+          <form class="pw-form" [formGroup]="bonusForm" (submit)="updateBonus()">
+
+            <div class="lg:mb-[16.5px] sm:mb-4 mb-4 w-full sm:flex">
+              <div class="pw-text">
+                <label for="bonusInput">Bonus Code</label>
+              </div>
+
+              <div class="w-full sm:px-[15px]">
+                <input formControlName="BonusAmount" type="text" class="new-password" id="bonusInput" />
+              </div>
+            </div>
+
+
+
+            <div class="flex w-full gap-[3.5px]">
+              <button type="submit" class="update bg-[#00b181] hover:bg-[#4dbd74]" id="changeSubmit"
+                [disabled]="bonusForm.invalid">
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<!-- Profile ends -->

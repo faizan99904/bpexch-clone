@@ -1,0 +1,71 @@
+<header>
+    <!-- Logo -->
+    <a class="text-[#00b181] hover:underline hidden min-[992px]:block" routerLink="/dashboard">
+        <span class="text-[25px] font-bold uppercase">ADMIN PANEL</span>
+    </a>
+    <!-- Menu icon -->
+    <button class="sidebar-toggle mx-0.5 inline-block focus:ring-2 !min-w-[46px] !max-h-[31px] ring-blue-700 rounded">
+        <span>
+            <img src="/assets/header/toggle.svg" (click)="toggleSidebar()" alt="toggle">
+        </span>
+    </button>
+    <!-- Logo tablet -->
+    <a class="text-[#00b181] hover:underline sm-toggle" routerLink="/dashboard">
+        <span class="text-[25px] font-bold uppercase">ADMIN PANEL</span>
+    </a>
+    <!-- Links -->
+    <ul class="links-list">
+        <li class="list-item pr-4 pl-[18px]"><a class="links" routerLink="/dashboard">Dashboard</a></li>
+        <li class="list-item px-4"><a class="links" routerLink="/users">Users</a></li>
+        <li class="list-item px-4"><a class="links" routerLink="/Reports/BookDetail">Reports</a></li>
+    </ul>
+    <!-- Account div -->
+    <ul class="flex flex-row ml-auto">
+        <li class="px-2 list-item" data-twe-dropdown-ref>
+            <a class="text-[#73818f] hover:text-black transition duration-150 ease-in-out" type="button"
+                id="dropdownMenuButton2" data-twe-dropdown-toggle-ref aria-expanded="false" data-twe-ripple-init
+                data-twe-ripple-color="light">
+                {{userName}} ({{userRole}})
+                <i class="fa fa-caret-down font-[900px] text-[#73818f] hover:text-black" aria-hidden="true"></i>
+            </a>
+            <!-- Dropdown content -->
+            <ul class="dropdown" aria-labelledby="dropdownMenuButton2" data-twe-dropdown-menu-ref>
+                <li>
+                    <a class="dropdown-item" data-twe-dropdown-item-ref routerLink="/Common/Profile">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Profile
+                    </a>
+                </li>
+                <li (click)="openChangePasswordModal()">
+                    <a class="dropdown-item" data-twe-dropdown-item-ref>
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                        Change Password
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" data-twe-dropdown-item-ref routerLink="/activity-log">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Activity Logs
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" data-twe-dropdown-item-ref routerLink="/login" (click)="logout()">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- Last item -->
+        <li class="list-item">
+            <a class="text-[#73818f] hover:text-black text-xs xs:text-base" routerLink="/dashboard">
+                <strong>B : </strong> <span class="mr-1">{{walletBalance}}</span>
+            </a>
+        </li>
+    </ul>
+
+
+</header>
+
+<app-change-password-modal *ngIf="showChangePasswordModal"
+    (close)="closeChangePasswordModal()"></app-change-password-modal>

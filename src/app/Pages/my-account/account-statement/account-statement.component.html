@@ -1,0 +1,78 @@
+<section class="overflow-y-auto pb-[50px]">
+  <div class="main-container">
+    <div class="header-container">
+      <strong>Account Statement</strong>
+    </div>
+    <div class="px-4 py-3">
+      <div class="flex items-center mb-3">
+        <div class="max-sm:w-full md:min-w-[140px] lg:min-w-[25%]">
+          <my-date-picker class="form-control my-date-picker picker-border" placeholder="Start Date" name="mydate"
+                          [(ngModel)]="startDate" [options]="myDpOptions" readonly
+                          #dp></my-date-picker>
+        </div>
+        <div class="text-center text-[16px] font-bold px-2">-</div>
+        <div class="max-sm:w-full md:min-w-[140px] lg:min-w-[25%]">
+          <my-date-picker class="form-control my-date-picker picker-border" placeholder="End Date" name="mydate"
+                          [(ngModel)]="endDate" [options]="myDpOptions" readonly
+                          #dp></my-date-picker>
+        </div>
+        <button class="bg-[#00b181] text-base text-white px-4 py-[5px] rounded ml-2 mb-1.5" (click)="submitDate()">Search</button>
+      </div>
+      <div class="overflow-x-auto">
+        <table datatable [dtOptions]="dtOptions" class="table w-full whitespace-nowrap border-b border-[#dee2e6] text-[12px]">
+          <thead>
+          <tr>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Id</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Date</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Username</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Deposit</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Withdraw</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Bank Balance</th>
+            <th class="border border-[#dee2e6] px-[4.8px] py-[5px]">Remarks</th>
+          </tr>
+          </thead>
+          <tbody *ngIf="transactions.length > 0">
+          <tr *ngFor="let transaction of transactions; let i = index">
+            <td class="border-b border-[#dee2e6]">{{ i + 1 }}</td>
+            <td class="border-b border-[#dee2e6]">{{ transaction.createdAt | date: 'M/d/yy, h:mm:ss a' }}</td>
+            <td class="border-b border-[#dee2e6]">{{ transaction.username }}</td>
+            <!-- Green badge with opacity for Deposit -->
+            <td class="border-b border-[#dee2e6]">
+              <span class="text-green-700">
+                {{ transaction.deposit }}
+              </span>
+            </td>
+            <!-- Red badge with opacity for Withdraw -->
+            <td class="border-b border-[#dee2e6]">
+              <span class="text-red-700">
+                {{ transaction.withdraw }}
+              </span>
+            </td>
+            <!-- Green badge for Bank Balance -->
+            <td class="border-b border-[#dee2e6]">
+              <span class="text-green-700">
+                {{ transaction.bankBalance | decimalFormat }}
+              </span>
+            </td>
+            <td class="border-b border-[#dee2e6]">{{ transaction.remarks }}</td>
+          </tr>
+          </tbody>
+          <tfoot>
+          <tr class="font-bold">
+            <td colspan="3" class="text-center">Total</td>
+            <td>{{ totalDeposit }}</td>
+            <td>{{ totalWithdraw }}</td>
+            <td></td>
+            <td></td>
+          </tr>
+          </tfoot>
+          <tbody *ngIf="transactions.length === 0">
+          <tr>
+            <td colspan="12" class="text-center">No matching records found</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+<div class="wrapper">
+  <div class="login-container">
+    <div class="login-wrapper">
+      <form class="w-full" (ngSubmit)="onLogin()" #loginForm="ngForm">
+        <!-- Logo Section -->
+        <span class="login-logo">
+           Admin Panel
+        </span>
+
+        <!-- Username Input -->
+        <div class="input-wrapper">
+          <input type="text" required placeholder="Username" [(ngModel)]="loginData.username" name="username"
+                 id="user_Username" class="focus:pl-1 lowercase" #username="ngModel" />
+          <!-- Error message for username -->
+          <div *ngIf="username.invalid && username.touched" class="text-danger text-[14px]">
+            Username is required
+          </div>
+          <span class="flex input-focus">
+            <img src="/assets/login-page/Account-User.svg" class="top-1.5 w-[20.2px] pl-[5px]" alt="account" />
+          </span>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input-wrapper !mt-0.5">
+          <input [type]="showPassword? 'text':'password'" required placeholder="Password"
+                 [(ngModel)]="loginData.password" name="password" class="focus:pl-1" #password="ngModel" />
+          <!-- Error message for password -->
+          <div *ngIf="password.invalid && password.touched" class="text-danger text-[14px]">
+            Password is required
+          </div>
+          <span class="flex input-focus">
+            <img src="/assets/login-page/password.svg" class="top-1.5 w-[20.2px] pl-[5px]" alt="password" />
+          </span>
+
+          <div class="eye-icons cursor-pointer h-[24px] w-[20px]" (click)="togglePassword()">
+            @if (showPassword) {
+              <div >
+                <i class="fas fa-eye "></i>
+              </div>
+            }
+            @if (!showPassword) {
+              <div>
+                <i class="fas fa-eye-slash"></i>
+              </div>
+            }
+          </div>
+
+
+
+        </div>
+
+        <!-- Login Button -->
+        <div class="login-form-btn">
+          <button class="login-btn" type="submit" [disabled]="loginForm.invalid">
+            Login
+          </button>
+        </div>
+
+        <!-- Error message from server -->
+        <div *ngIf="errorMessage" class="text-danger text-[18px] mt-2">
+          {{ errorMessage }}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

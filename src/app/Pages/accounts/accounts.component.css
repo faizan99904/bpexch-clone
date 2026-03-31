@@ -1,0 +1,125 @@
+.header-container{
+    @apply flex gap-[12.1px] bg-[#f0f3f5] !border-b-[1px] border-[#c8ced3] w-full pr-5 pl-[1.28rem] py-[4.8px]
+     h-[34.69px]  items-center
+}
+.header-container-client{
+    @apply flex gap-[12.1px] !border-b-[1px] border-[#c8ced3] w-full pr-5 pl-[1.27rem]
+    pt-[2px] md:h-[39.1px]  items-start
+}
+.main-container{
+    @apply rounded-[3px] overflow-hidden bg-white border-[1px] border-[#c8ced3]
+}
+
+.input:focus{
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    box-shadow: 0 0 0 .2rem rgba(32, 168, 216, .25);
+    @apply border rounded border-[#8ad4ee] outline-none bg-[#fff]
+}
+
+.loader {
+    position:absolute;
+    left: 12rem;
+    top: 36px;
+    --d:12px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    color: black;
+    box-shadow:
+      calc(1*var(--d))      calc(0*var(--d))     0 0,
+      calc(0.707*var(--d))  calc(0.707*var(--d)) 0 1px,
+      calc(0*var(--d))      calc(1*var(--d))     0 2px,
+      calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px,
+      calc(-0.707*var(--d)) calc(0.707*var(--d)) 0 3px;
+    animation: l27 1s infinite steps(8);
+  }
+  @keyframes l27 {
+    100% {transform: rotate(1turn)}
+  }
+
+.dataTable {
+    @apply my-[6px] max-w-full border border-[#ddd] w-full mb-5 bg-transparent;
+
+ }
+
+ .table-subheading{
+    @apply border text-[14px] !font-semibold !py-2 !pl-2 !pr-[30px]
+ }
+ .input{
+ @apply   w-[207px] h-[35px] rounded px-[11px] py-[6px] border-[#e4e7ea]  border bg-[#f1f1f1] text-[1rem] text-[#5c6873]
+ }
+ .inactive-btn{
+    @apply bg-transparent font-semibold  px-3 rounded-[0.2rem] text-[12.25px] py-3 h-[28.38px] whitespace-nowrap border border-[#f86c6b] text-[#f86c6b] hover:bg-[#f86c6b] hover:text-[#fff] hover:border-[#f86c6b] flex justify-center items-center gap-1
+ }
+ .active-btn{
+    @apply bg-[#00b181] font-semibold  px-3 rounded-[0.2rem] text-[12.25px] py-3 h-[28.38px] whitespace-nowrap border border-[#4dbd74] text-[#fff] hover:bg-[#4dbd74] hover:border-[#4dbd74] flex justify-center items-center gap-1
+ }
+ .Ledger-btn{
+    @apply bg-[#63c2de] font-semibold  px-3 rounded-[0.2rem] text-[12.25px] py-3 h-[28.38px] whitespace-nowrap border border-[#63c2de] text-[#23282c] hover:bg-[#43b6d7] hover:border-[#39b2d5] flex justify-center items-center gap-1
+ }
+ .edit-btn{
+    @apply bg-[#00b181] font-semibold  px-3 rounded-[0.2rem] text-[12.25px] py-3 h-[28.38px] whitespace-nowrap border border-[#00b181] text-[#fff] hover:bg-[#4dbd74] hover:border-[#4dbd74] flex justify-center items-center gap-1
+ }
+ .cradit-btn{
+    @apply bg-[#ffc107] font-semibold  px-3 rounded-[0.2rem] text-[12.25px] py-3 h-[28.38px] whitespace-nowrap border border-[#ffc107] text-[#23282c] hover:bg-[#e0a800] hover:border-[#d39e00] flex justify-center items-center gap-1
+ }
+ .search-btn{
+    @apply bg-[#00b181] h-[35px] text-[14px] w-[84px] whitespace-nowrap border border-[#00b181] text-[#fff] hover:bg-[#4dbd74] hover:border-[#4dbd74] flex justify-center items-center gap-1
+ }
+
+ .cradit-table-btn{
+    @apply bg-[#00b181] font-semibold rounded-[0.2rem] text-[14px]  whitespace-nowrap border border-[#00b181] text-[#fff] hover:bg-[#4dbd74] hover:border-[#4dbd74] flex justify-center items-center px-3 py-2
+ }
+
+::ng-deep .dt-layout-full{
+   overflow-x: auto;
+   overflow-y: hidden;
+}
+
+::ng-deep .dt-search{
+@apply flex flex-col justify-end text-end;
+ }
+::ng-deep  .dt-input:focus{
+      transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    box-shadow: 0 0 0 .2rem rgba(32, 168, 216, .25);
+    @apply border rounded border-[#8ad4ee] outline-none bg-[#fff]
+ }
+
+::ng-deep  div.dt-container div.dt-layout-row{
+margin-bottom:0px !important ;
+margin-top:7px !important
+ }
+::ng-deep  .dt-length{
+display: none !important;
+ }
+
+::ng-deep  .dt-paging{
+display: none !important;
+ }
+::ng-deep  .table-heading {
+text-align: start !important;
+font-size: 1rem !important;
+@apply border text-[14px] !py-1 !pl-2 !pr-[30px] !font-bold;
+ }
+
+ ::ng-deep table.dataTable>thead>tr>th, table.dataTable>thead>tr>td {
+   border: 1px solid rgba(0, 0, 0, 0.3) !important;
+ }
+ ::ng-deep div.dt-container.dt-empty-footer tbody>tr:last-child>*{
+   border: 1px solid rgba(0, 0, 0, 0.3) !important;
+ }
+
+ ::ng-deep table.dataTable thead>tr>th.dt-orderable-asc, table.dataTable thead>tr>th.dt-orderable-desc{
+   @apply !py-[4.8px] !pl-[5px]
+ }
+
+ ::ng-deep div.dt-container.dt-empty-footer tbody>tr:last-child>*{
+      @apply !py-[4.8px] !pl-[5px]
+ }
+::ng-deep div.dt-container .dt-search input {
+   @apply max-h-[28.38px] border-[#E5E7EA] lg:translate-x-2 lg:min-w-[203px] max-w-[203px]  mx-auto md:mx-0
+}
+
+::ng-deep div.dt-container .dt-search label{
+  @apply lg:mt-[19px] text-center md:text-end
+}
