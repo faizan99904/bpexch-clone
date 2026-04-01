@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {BackendService} from "./backend.service";
-import {WalletService} from "./wallet.service";
-import {ToastrService} from "ngx-toastr";
+import { BackendService } from "./backend.service";
+import { WalletService } from "./wallet.service";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -85,6 +85,7 @@ export class AuthService {
 
 
   fetchWalletBalance() {
+    return
     if (this.isLoggedIn()) {
       this.backend.getWalletBalance().subscribe({
         next: (response) => {

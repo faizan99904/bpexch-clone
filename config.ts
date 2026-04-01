@@ -98,5 +98,6 @@ export const CONFIG = {
   getOperatorGames: BASE_URL_API + '/api/operator/games/',
   addGame: BASE_URL_API + '/api/operator/games',
   updateGameRtp: BASE_URL_API + '/api/operator/games',
-  updateGameLimits: BASE_URL_API + '/api/operator/games'
+  updateGameLimits: BASE_URL_API + '/api/operator/games',
+  adminOperator: BASE_URL_API + '/api/operator/games'
 }

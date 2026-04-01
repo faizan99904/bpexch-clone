@@ -31,6 +31,8 @@ import { UserPlReportComponent } from './Pages/user-pl-report/user-pl-report.com
 import { UserReportHistoryComponent } from './Pages/user-report-history/user-report-history.component';
 import { UserRoundRangeComponent } from './Pages/user-round-range/user-round-range.component';
 import { GameListComponent } from './Pages/game-list/game-list.component';
+import { OperatorEventComponent } from './Pages/operator-event/operator-event.component';
+import { LedgerComponent } from './Pages/ledger/ledger.component';
 
 
 export const routes: Routes = [
@@ -63,6 +65,8 @@ export const routes: Routes = [
       { path: 'activity-log', component: ActivityLogComponent, canActivate: [AuthGuard] },
       { path: 'round-range/:eventId/:startDate/:endDate', component: RoundRangeComponent, canActivate: [AuthGuard] },
       { path: 'game-list/:id/:name', component: GameListComponent, canActivate: [AuthGuard] },
+      { path: 'operator-event', component: OperatorEventComponent, canActivate: [AuthGuard] },
+      { path: 'ledger', component: LedgerComponent, canActivate: [AuthGuard] },
       {
         path: 'user-bet-history/:eventId/:roundId',
         component: reportHistory,

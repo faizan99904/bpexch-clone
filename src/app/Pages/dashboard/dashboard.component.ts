@@ -44,6 +44,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchStats() {
+    return
     this.backend.getAllStats().subscribe(
       (response) => {
         if (response.status === 'success') {
