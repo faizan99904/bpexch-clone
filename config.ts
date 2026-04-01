@@ -2,8 +2,8 @@
 // export const BASE_URL_API = "https://vertexapi-44ir.onrender.com";
 
 
-export const BASE_URL_API = "https://api.playfortune.bet";
-export const BAse_URL1 = 'https://api.playfortune.bet'
+export const BASE_URL_API = "https://vertexapi-green-sky-9763.fly.dev";
+export const BAse_URL1 = 'https://vertexapi-green-sky-9763.fly.dev'
 
 export const CONFIG = {
   // Login
@@ -90,5 +90,13 @@ export const CONFIG = {
   // user p&l reports
   userPlReport: BASE_URL_API + '/api/reports/eventrange/user',
   roundsRange: BASE_URL_API + '/api/reports/roundsrange/user',
-  roundHistory: BASE_URL_API + '/api/bets/bethistory/user'
+  roundHistory: BASE_URL_API + '/api/bets/bethistory/user',
+
+  //  operator 
+
+  createOperator: BASE_URL_API + '/api/operator/create',
+  getOperatorGames: BASE_URL_API + '/api/operator/games/',
+  addGame: BASE_URL_API + '/api/operator/games',
+  updateGameRtp: BASE_URL_API + '/api/operator/games',
+  updateGameLimits: BASE_URL_API + '/api/operator/games'
 }

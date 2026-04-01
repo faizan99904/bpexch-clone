@@ -1,49 +1,124 @@
 <div class="main-parent mb-[34px]">
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <div class="main-heading radius">{{ isEditMode ? 'Edit User' : 'Create New User' }}</div>
+    <div class="main-heading radius">{{ isEditMode ? 'Edit operator' : 'Create New operator' }}</div>
 
     <div class="validations">
       <div class="main">
-        <!-- Username -->
+        <!-- operatorName -->
         <div class="main-username">
-          <div class="heading-username">Username</div>
+          <div class="heading-username">Operator Name</div>
           <div class="main-input-child">
-            <input class="inputs" type="text lowercase" formControlName="username">
-            <div *ngIf="userForm.get('username')?.hasError('required') && userForm.get('username')?.touched"
+            <input class="inputs" type="text" formControlName="operatorName">
+            <div *ngIf="userForm.get('operatorName')?.hasError('required') && userForm.get('operatorName')?.touched"
               class="error">
               This field is required.
             </div>
-            <div *ngIf="errorMessages['username']" class="error">
-              {{ errorMessages['username'] }}
+            <div *ngIf="errorMessages['operatorName']" class="error">
+              {{ errorMessages['operatorName'] }}
             </div>
           </div>
         </div>
 
-        <!-- Name -->
+        <!-- operatorCode -->
         <div class="main-username">
-          <div class="heading-username">Name</div>
+          <div class="heading-username">Operator Code</div>
           <div class="main-input-child">
-            <input class="inputs" type="text" formControlName="name">
-            <div *ngIf="userForm.get('name')?.hasError('required') && userForm.get('name')?.touched" class="error">
+            <input class="inputs" type="text" formControlName="operatorCode">
+            <div *ngIf="userForm.get('operatorCode')?.hasError('required') && userForm.get('operatorCode')?.touched"
+              class="error">
               This field is required.
             </div>
-            <div *ngIf="errorMessages['name']" class="error">
-              {{ errorMessages['name'] }}
+            <div *ngIf="errorMessages['operatorCode']" class="error">
+              {{ errorMessages['operatorCode'] }}
             </div>
           </div>
         </div>
 
-        <!-- Password (Only in create mode) -->
-        <div *ngIf="!isEditMode" class="password mb-[15px]">
-          <div class="password-heading">Password</div>
+        <!-- domain -->
+        <div class="main-username">
+          <div class="heading-username">Domain</div>
+          <div class="main-input-child">
+            <input class="inputs" type="text" formControlName="domain">
+            <div *ngIf="userForm.get('domain')?.hasError('required') && userForm.get('domain')?.touched" class="error">
+              This field is required.
+            </div>
+            <div *ngIf="errorMessages['domain']" class="error">
+              {{ errorMessages['domain'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- walletBaseUrl -->
+        <div class="main-username">
+          <div class="heading-username">Wallet Base URL</div>
+          <div class="main-input-child">
+            <input class="inputs" type="text" formControlName="walletBaseUrl">
+            <div *ngIf="userForm.get('walletBaseUrl')?.hasError('required') && userForm.get('walletBaseUrl')?.touched"
+              class="error">
+              This field is required.
+            </div>
+            <div *ngIf="errorMessages['walletBaseUrl']" class="error">
+              {{ errorMessages['walletBaseUrl'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- walletApiKey -->
+        <div class="main-username">
+          <div class="heading-username">Wallet API Key</div>
+          <div class="main-input-child">
+            <input class="inputs" type="text" formControlName="walletApiKey">
+            <div *ngIf="userForm.get('walletApiKey')?.hasError('required') && userForm.get('walletApiKey')?.touched"
+              class="error">
+              This field is required.
+            </div>
+            <div *ngIf="errorMessages['walletApiKey']" class="error">
+              {{ errorMessages['walletApiKey'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- walletSecret -->
+        <div class="main-username">
+          <div class="heading-username">Wallet Secret</div>
+          <div class="main-input-child">
+            <input class="inputs" type="text" formControlName="walletSecret">
+            <div *ngIf="userForm.get('walletSecret')?.hasError('required') && userForm.get('walletSecret')?.touched"
+              class="error">
+              This field is required.
+            </div>
+            <div *ngIf="errorMessages['walletSecret']" class="error">
+              {{ errorMessages['walletSecret'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- adminUsername -->
+        <div class="main-username">
+          <div class="heading-username">Admin Username</div>
+          <div class="main-input-child">
+            <input class="inputs" type="text" formControlName="adminUsername">
+            <div *ngIf="userForm.get('adminUsername')?.hasError('required') && userForm.get('adminUsername')?.touched"
+              class="error">
+              This field is required.
+            </div>
+            <div *ngIf="errorMessages['adminUsername']" class="error">
+              {{ errorMessages['adminUsername'] }}
+            </div>
+          </div>
+        </div>
+
+        <!-- adminPassword -->
+        <div class="password mb-[15px]">
+          <div class="password-heading">Admin Password</div>
           <div class="main-input-child relative">
-            <input class="inputs" [type]="showPassword? 'text':'password'" formControlName="password">
-            <div *ngIf="userForm.get('password')?.hasError('required') && userForm.get('password')?.touched"
+            <input class="inputs" [type]="showPassword? 'text':'password'" formControlName="adminPassword">
+            <div *ngIf="userForm.get('adminPassword')?.hasError('required') && userForm.get('adminPassword')?.touched"
               class="error">
               This field is required.
             </div>
-            <div *ngIf="errorMessages['password']" class="error">
-              {{ errorMessages['password'] }}
+            <div *ngIf="errorMessages['adminPassword']" class="error">
+              {{ errorMessages['adminPassword'] }}
             </div>
 
             <div class="eye-icons cursor-pointer h-[24px] w-[20px] !text-black" (click)="togglePassword()">
@@ -61,137 +136,59 @@
           </div>
         </div>
 
-        <!-- Balance (Only in create mode) -->
-        <div *ngIf="!isEditMode" class="main-username">
-          <div class="heading-username">Balance</div>
+        <!-- adminName -->
+        <div class="main-username">
+          <div class="heading-username">Admin Name</div>
           <div class="main-input-child">
-            <input class="inputs" type="number" formControlName="balance" (input)="preventNegative($event)">
-            <div *ngIf="userForm.get('balance')?.hasError('required') && userForm.get('balance')?.touched"
+            <input class="inputs" type="text" formControlName="adminName">
+            <div *ngIf="userForm.get('adminName')?.hasError('required') && userForm.get('adminName')?.touched"
               class="error">
               This field is required.
             </div>
-            <div *ngIf="errorMessages['balance']" class="error">
-              {{ errorMessages['balance'] }}
+            <div *ngIf="errorMessages['adminName']" class="error">
+              {{ errorMessages['adminName'] }}
             </div>
           </div>
         </div>
 
+        <!-- adminEmail -->
         <div class="main-username">
-          <div class="heading-username">Phone No</div>
+          <div class="heading-username">Admin Email</div>
           <div class="main-input-child">
-            <input class="inputs" type="text" formControlName="mobileNo">
-            <div *ngIf="userForm.get('mobileNo')?.hasError('required') && userForm.get('mobileNo')?.touched"
+            <input class="inputs" type="email" formControlName="adminEmail">
+            <div *ngIf="userForm.get('adminEmail')?.hasError('required') && userForm.get('adminEmail')?.touched"
               class="error">
               This field is required.
             </div>
-            <div *ngIf="errorMessages['name']" class="error">
-              {{ errorMessages['name'] }}
+            <div *ngIf="userForm.get('adminEmail')?.hasError('email') && userForm.get('adminEmail')?.touched"
+              class="error">
+              Please enter a valid email address.
+            </div>
+            <div *ngIf="errorMessages['adminEmail']" class="error">
+              {{ errorMessages['adminEmail'] }}
             </div>
           </div>
         </div>
 
-        @if(userDetails?.role == 'SUPER'){
+        <!-- adminCurrency -->
         <div class="main-username">
-          <div class="heading-username">Domain</div>
+          <div class="heading-username">Admin Currency</div>
           <div class="main-input-child">
-            <input class="inputs" type="text" formControlName="domain">
-            <div *ngIf="userForm.get('domain')?.hasError('required') && userForm.get('domain')?.touched" class="error">
-              This field is required.
-            </div>
-            <div *ngIf="errorMessages['name']" class="error">
-              {{ errorMessages['name'] }}
-            </div>
-          </div>
-        </div>
-        }
-
-
-        <!-- Role -->
-        <div class="main-type" *ngIf="!isEditMode">
-          <div class="type-heading">Role</div>
-          <div class="main-radio">
-            <div class="super-master" *ngIf="isSuperUser()">
-              <p class="txt">Admin</p>
-              <input class="radio-input" type="radio" formControlName="role" value="ADMIN">
-            </div>
-            <div class="bettor">
-              <p class="txt">User</p>
-              <input class="radio-input" type="radio" formControlName="role" value="USER">
-            </div>
-            <div *ngIf="userForm.get('role')?.hasError('required') && userForm.get('role')?.touched" class="error">
-              This field is required.
-            </div>
-            <div *ngIf="errorMessages['role']" class="error">
-              {{ errorMessages['role'] }}
-            </div>
-          </div>
-        </div>
-
-        <!-- Is Demo -->
-        <div class="main-checkbox">
-          <div class="checkbox-heading">Is Demo</div>
-          <div class="flex">
-            <div class="child-checkbox">
-              <input type="checkbox" class="checkbox" formControlName="isDemo">
-            </div>
-          </div>
-        </div>
-
-        <!-- Status -->
-        <div class="main-username">
-          <div class="heading-username">Status</div>
-          <div class="main-input-child">
-            <select class="inputs" formControlName="status">
-              <option value="" disabled>Select Status</option>
-              <option value="active">Active</option>
-              <option value="suspended">Suspended</option>
-              <option value="locked">Locked</option>
-            </select>
-            <div *ngIf="userForm.get('status')?.hasError('required') && userForm.get('status')?.touched" class="error">
-              This field is required.
-            </div>
-            <div *ngIf="errorMessages['status']" class="error">
-              {{ errorMessages['status'] }}
-            </div>
-          </div>
-        </div>
-
-        <!-- Currency -->
-        <div class="main-username" *ngIf="isSuperUser()">
-          <div class="heading-username">Currency</div>
-          <div class="main-input-child">
-            <select class="inputs" formControlName="currency">
+            <select class="inputs" formControlName="adminCurrency">
               <option value="" disabled>Select Currency</option>
               <option value="USD">USD</option>
               <option value="INR">INR</option>
               <option value="PKR">PKR</option>
             </select>
-            <div *ngIf="userForm.get('currency')?.hasError('required') && userForm.get('currency')?.touched"
+            <div *ngIf="userForm.get('adminCurrency')?.hasError('required') && userForm.get('adminCurrency')?.touched"
               class="error">
               This field is required.
             </div>
-            <div *ngIf="errorMessages['currency']" class="error">
-              {{ errorMessages['currency'] }}
+            <div *ngIf="errorMessages['adminCurrency']" class="error">
+              {{ errorMessages['adminCurrency'] }}
             </div>
           </div>
         </div>
-
-        <!-- min max  -->
-        <div class="main-username" *ngIf="isSuperUser()">
-          <div class="heading-username">Min Bet Limit</div>
-          <div class="main-input-child">
-            <input class="inputs" type="number" formControlName="minimumBets">
-          </div>
-        </div>
-
-        <div class="main-username" *ngIf="isSuperUser()">
-          <div class="heading-username">Max Bet Limit</div>
-          <div class="main-input-child">
-            <input class="inputs" type="number" formControlName="maximumBets">
-          </div>
-        </div>
-
-
 
       </div>
     </div>

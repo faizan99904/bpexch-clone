@@ -191,5 +191,8 @@ export class AllUserDetailComponent implements OnInit {
     });
   }
 
+  navigateToGameList(person: any) {
+    this.router.navigateByUrl(`/game-list/${person.operatorId}/${person.name}`)
+  }
 
 }

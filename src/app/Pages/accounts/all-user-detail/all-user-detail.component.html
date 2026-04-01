@@ -80,6 +80,13 @@
                 Edit User
               </span>
             </button>
+            <button *ngIf="!currentUserId" class="relative group delete-btn !bg-purple-500 !border-purple-500" type="button"
+              (click)="navigateToGameList(person)">
+              <i class="fas fa-gamepad"></i>
+              <span class="tooltip group-hover:opacity-100 group-hover:translate-y-0">
+                Game List
+              </span>
+            </button>
             <button *ngIf="!currentUserId" class="relative group delete-btn" type="button"
               (click)="onOpenModal(person, 'delete')">
               <i class="fas fa-trash"></i>

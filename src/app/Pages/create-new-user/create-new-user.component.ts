@@ -18,8 +18,9 @@ export class CreateNewUserComponent implements OnInit {
   errorMessages: { [key: string]: string } = {};
   isEditMode: boolean = false;
   userId: string | null = null;
-  showPassword: boolean = false
-  userDetails: any
+  showPassword: boolean = false;
+  userDetails: any;
+
   constructor(
     private fb: FormBuilder,
     private backend: BackendService,
@@ -29,6 +30,7 @@ export class CreateNewUserComponent implements OnInit {
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
   ) { }
+
   ngOnInit(): void {
     this.initializeForm();
     this.userId = this.route.snapshot.paramMap.get('id');
@@ -41,75 +43,29 @@ export class CreateNewUserComponent implements OnInit {
       } else {
         console.error('No userData found in history state.');
       }
-    } else {
-      this.addEmailAndPasswordValidators();
     }
-    this.handleRoleChange();
-
   }
 
   private initializeForm(): void {
-
-    this.userDetails = JSON.parse(localStorage.getItem('userDetails') || '{}');
-    let defaultRole = 'USER';
-    if (this.userDetails.role === 'SUPER') {
-      defaultRole = 'ADMIN';
-    }
-
-
-    const formGroupConfig: any = {
-      username: ['', Validators.required],
-      name: ['', Validators.required],
-      password: [''],
-      balance: [null],
-      role: [defaultRole, Validators.required],
-      mobileNo: [''],
-      isDemo: [false],
-      status: ['active', Validators.required],
-      minimumBets: [''],
-      maximumBets: [''],
-      domain: ['']
-    };
-
-    if (this.isSuperUser()) {
-      formGroupConfig.currency = ['', Validators.required];
-    }
-
-    this.userForm = this.fb.group(formGroupConfig);
-
+    this.userForm = this.fb.group({
+      operatorName: ['', Validators.required],
+      operatorCode: ['', Validators.required],
+      domain: ['', Validators.required],
+      walletBaseUrl: ['', Validators.required],
+      walletApiKey: ['', Validators.required],
+      walletSecret: ['', Validators.required],
+      adminUsername: ['', Validators.required],
+      adminPassword: ['', Validators.required],
+      adminName: ['', Validators.required],
+      adminEmail: ['', [Validators.required, Validators.email]],
+      adminCurrency: ['', Validators.required]
+    });
   }
 
   private populateForm(userData: any): void {
     this.userForm.patchValue(userData);
-    this.removeNonEditableFields();
     this.cdr.detectChanges();
   }
-
-  private removeNonEditableFields(): void {
-    ['password', 'balance'].forEach(field => this.userForm.removeControl(field));
-  }
-
-  private addEmailAndPasswordValidators(): void {
-    this.userForm.get('password')?.setValidators([Validators.required]);
-    this.userForm.updateValueAndValidity();
-  }
-
-  private handleRoleChange(): void {
-    const roleControl = this.userForm.get('role');
-    const currencyControl = this.userForm.get('currency');
-
-    if (roleControl && currencyControl) {
-      roleControl.valueChanges.subscribe((role) => {
-        if (role === 'SUPER') {
-          currencyControl.setValidators([Validators.required]);
-        } else {
-          currencyControl.clearValidators();
-        }
-        currencyControl.updateValueAndValidity();
-      });
-    }
-  }
-
 
   isSuperUser(): boolean {
     return this.authService.hasRole('SUPER');
@@ -118,20 +74,18 @@ export class CreateNewUserComponent implements OnInit {
   onSubmit(): void {
     if (this.userForm.invalid) return;
 
-
     const formValues = { ...this.userForm.value };
-    // if (formValues.role !== 'SUPER') {
-    //   delete formValues.currency;
-    // }
-    if (formValues.username) {
-      formValues.username = formValues.username.toLowerCase();
+
+    // Convert adminUsername to lowercase
+    if (formValues.adminUsername) {
+      formValues.adminUsername = formValues.adminUsername.toLowerCase();
     }
 
     const payload = this.isEditMode ? this.getChangedFields() : formValues;
 
     const request$ = this.isEditMode
       ? this.backend.updateUser(this.userId!, payload)
-      : this.backend.createUser(formValues);
+      : this.backend.createUser(payload);
 
     request$.subscribe({
       next: (response) => {
@@ -160,14 +114,7 @@ export class CreateNewUserComponent implements OnInit {
     this.toastr.error(message, 'Error');
   }
 
-  preventNegative(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (parseFloat(input.value) < 0) {
-      input.value = input.value.replace('-', '');
-    }
-  }
-
   togglePassword() {
-    this.showPassword = !this.showPassword
+    this.showPassword = !this.showPassword;
   }
 }

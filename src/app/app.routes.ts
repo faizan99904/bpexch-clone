@@ -30,6 +30,7 @@ import { ActivityLogComponent } from './Pages/activity-log/activity-log.componen
 import { UserPlReportComponent } from './Pages/user-pl-report/user-pl-report.component';
 import { UserReportHistoryComponent } from './Pages/user-report-history/user-report-history.component';
 import { UserRoundRangeComponent } from './Pages/user-round-range/user-round-range.component';
+import { GameListComponent } from './Pages/game-list/game-list.component';
 
 
 export const routes: Routes = [
@@ -61,6 +62,7 @@ export const routes: Routes = [
       { path: 'banner', component: BannerComponent, canActivate: [AuthGuard] },
       { path: 'activity-log', component: ActivityLogComponent, canActivate: [AuthGuard] },
       { path: 'round-range/:eventId/:startDate/:endDate', component: RoundRangeComponent, canActivate: [AuthGuard] },
+      { path: 'game-list/:id/:name', component: GameListComponent, canActivate: [AuthGuard] },
       {
         path: 'user-bet-history/:eventId/:roundId',
         component: reportHistory,

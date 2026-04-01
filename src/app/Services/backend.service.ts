@@ -25,7 +25,7 @@ export class BackendService {
 
   // users
   createUser(req: any): Observable<any> {
-    return this.http.post<any>(CONFIG.createUser, req);
+    return this.http.post<any>(CONFIG.createOperator, req);
   }
 
   updateUser(userId: string, payload: any): Observable<any> {

@@ -1,0 +1,298 @@
+<section class="h-[85vh] overflow-y-auto bg-slate-50 p-4 md:p-6">
+    <div class="mx-auto max-w-[1600px]">
+        <!-- Header -->
+        <div
+            class="mb-5 flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:flex-row md:items-center md:justify-between">
+            <div>
+                <h2 class="text-xl font-semibold text-slate-800 md:text-2xl">Game Events</h2>
+                <p class="text-sm text-slate-500">Manage event settings, betting limits, RTP, and operator controls.</p>
+            </div>
+
+            <button
+                class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                (click)="openAddModal()">
+                + Add Event
+            </button>
+        </div>
+
+        <!-- Table Card -->
+        <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <div class="border-b border-slate-200 px-4 py-3">
+                <h3 class="text-base font-semibold text-slate-700">Event List</h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full text-sm">
+                    <thead class="bg-slate-100">
+                        <tr class="text-left text-xs font-semibold uppercase tracking-wider text-slate-600">
+                            <th class="whitespace-nowrap px-4 py-4 text-center">Icon</th>
+                            <th class="whitespace-nowrap px-4 py-4">Event ID</th>
+                            <th class="whitespace-nowrap px-4 py-4">Event Name</th>
+                            <th class="whitespace-nowrap px-4 py-4">Sequence</th>
+                            <th class="whitespace-nowrap px-4 py-4">Link</th>
+                            <th class="whitespace-nowrap px-4 py-4">Global Active</th>
+                            <th class="whitespace-nowrap px-4 py-4">Global Maintenance</th>
+                            <th class="whitespace-nowrap px-4 py-4">Operator Enabled</th>
+                            <th class="whitespace-nowrap px-4 py-4">Operator Maintenance</th>
+                            <th class="whitespace-nowrap px-4 py-4">Min Bet</th>
+                            <th class="whitespace-nowrap px-4 py-4">Max Bet</th>
+                            <th class="whitespace-nowrap px-4 py-4">RTP</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="divide-y divide-slate-200 bg-white">
+                        <tr *ngFor="let game of gameList; let i = index" class="transition hover:bg-slate-50">
+                            <td class="px-4 py-4">
+                                <div class="flex justify-center">
+                                    <div
+                                        class="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 shadow-sm">
+                                        <img [src]="game.icon || 'assets/default-icon.png'" alt="Game Icon"
+                                            class="h-10 w-10 rounded-lg object-cover" />
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-4 font-medium text-slate-700">
+                                {{ game.eventId }}
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <div class="font-semibold text-slate-800">{{ game.eventName }}</div>
+                            </td>
+
+                            <td class="px-4 py-4 text-slate-600">
+                                {{ game.sequence }}
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <a [href]="game.link" target="_blank"
+                                    class="inline-flex max-w-[240px] truncate rounded-lg bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 transition hover:bg-blue-100 hover:text-blue-800">
+                                    {{ game.link }}
+                                </a>
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <span
+                                    [ngClass]="game.global?.isActive ? 'bg-emerald-100 text-emerald-700 ring-emerald-200' : 'bg-rose-100 text-rose-700 ring-rose-200'"
+                                    class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset">
+                                    {{ game.global?.isActive ? 'Active' : 'Inactive' }}
+                                </span>
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <span
+                                    [ngClass]="game.global?.isMaintenance ? 'bg-amber-100 text-amber-700 ring-amber-200' : 'bg-slate-100 text-slate-700 ring-slate-200'"
+                                    class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset">
+                                    {{ game.global?.isMaintenance ? 'Yes' : 'No' }}
+                                </span>
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <select [value]="game.operator.enabled" #enabledSelect
+                                    class="w-full min-w-[130px] rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
+                                    (change)="updateEnabled(enabledSelect.value === 'true', game)">
+                                    <option value="true">Enabled</option>
+                                    <option value="false">Disabled</option>
+                                </select>
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <span
+                                    class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700 ring-1 ring-inset ring-slate-200">
+                                    {{ game.operator.maintenance }}
+                                </span>
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <input type="number" [(ngModel)]="game.operator.minBet"
+                                    class="w-24 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" />
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-2">
+                                    <input type="number" [(ngModel)]="game.operator.maxBet"
+                                        class="w-24 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" />
+
+                                    <button (click)="updateLimits(game)"
+                                        class="inline-flex whitespace-nowrap rounded-xl bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                                        Save
+                                    </button>
+                                </div>
+                            </td>
+
+                            <td class="px-4 py-4">
+                                <div class="flex items-center gap-2">
+                                    <input type="number" [(ngModel)]="game.operator.rtp"
+                                        class="w-24 rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-200" />
+
+                                    <button (click)="updateRtp(game, game.operator.rtp)"
+                                        class="inline-flex whitespace-nowrap rounded-xl bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2">
+                                        Update RTP
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="!gameList?.length">
+                            <td colspan="12" class="px-4 py-10 text-center text-sm text-slate-500">
+                                No events found.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Edit Modal -->
+<div *ngIf="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+    <div class="relative w-full max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+        <button (click)="closeModal()"
+            class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-lg text-slate-600 transition hover:bg-slate-200 hover:text-slate-800">
+            &times;
+        </button>
+
+        <div class="mb-5 border-b border-slate-200 pb-4">
+            <h3 class="text-xl font-semibold text-slate-800">Edit Game</h3>
+            <p class="mt-1 text-sm text-slate-500">Update event details without changing existing functionality.</p>
+        </div>
+
+        <form [formGroup]="gameForm" (ngSubmit)="onSubmit()" class="space-y-5">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Event ID</label>
+                    <input type="text" formControlName="eventId"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Event Name</label>
+                    <input type="text" formControlName="eventName"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Sequence</label>
+                    <input type="number" formControlName="sequence"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Link</label>
+                    <input type="url" formControlName="link"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Icon</label>
+                    <input type="text" formControlName="icon"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Image</label>
+                    <input type="text" formControlName="image"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Min Bet</label>
+                    <input type="number" formControlName="minBet"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Max Bet</label>
+                    <input type="number" formControlName="maxBet"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200" />
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Operator Enabled</label>
+                    <select formControlName="enabled"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200">
+                        <option [value]="true">Enabled</option>
+                        <option [value]="false">Disabled</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="mb-1.5 block text-sm font-medium text-slate-700">Operator Maintenance</label>
+                    <select formControlName="maintenance"
+                        class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200">
+                        <option [value]="true">Yes</option>
+                        <option [value]="false">No</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3 border-t border-slate-200 pt-4">
+                <button type="button"
+                    class="rounded-xl bg-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-300"
+                    (click)="closeModal()">
+                    Cancel
+                </button>
+
+                <button type="submit" [disabled]="gameForm.invalid"
+                    class="rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add Event Modal -->
+<div *ngIf="showAddModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
+    <div class="relative w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-2xl">
+        <button (click)="closeAddModal()"
+            class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-lg text-slate-600 transition hover:bg-slate-200 hover:text-slate-800">
+            &times;
+        </button>
+
+        <div class="mb-5 border-b border-slate-200 pb-4">
+            <h3 class="text-xl font-semibold text-slate-800">Add Event</h3>
+        </div>
+
+        <form [formGroup]="addForm" (ngSubmit)="onAddSubmit()" class="space-y-4">
+            <div>
+                <label class="mb-1.5 block text-sm font-medium text-slate-700">Select Event</label>
+                <select formControlName="eventId"
+                    class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200">
+                    <option value="">Select</option>
+                    <option *ngFor="let event of eventList" [value]="event._id">
+                        {{ event.eventName }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label class="mb-1.5 block text-sm font-medium text-slate-700">Operator</label>
+                <input type="text" [value]="operatorName" disabled
+                    class="w-full rounded-xl border border-slate-300 bg-slate-100 px-3 py-2.5 text-sm text-slate-500" />
+            </div>
+
+            <div>
+                <label class="mb-1.5 block text-sm font-medium text-slate-700">Enabled</label>
+                <select formControlName="enabled"
+                    class="w-full rounded-xl border border-slate-300 px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-green-500 focus:ring-2 focus:ring-green-200">
+                    <option [ngValue]="true">Enabled</option>
+                    <option [ngValue]="false">Disabled</option>
+                </select>
+            </div>
+
+            <div class="flex justify-end gap-3 border-t border-slate-200 pt-4">
+                <button type="button" (click)="closeAddModal()"
+                    class="rounded-xl bg-slate-200 px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-300">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                    class="rounded-xl bg-green-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-green-700">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
