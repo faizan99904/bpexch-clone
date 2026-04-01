@@ -1,0 +1,16 @@
+{
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node",
+      "config": {
+        "nodeVersion": "20.x"
+      }
+    }
+  ],
+  "build": {
+    "env": {
+      "NODE_VERSION": "20.9.0"
+    }
+  }
+}
