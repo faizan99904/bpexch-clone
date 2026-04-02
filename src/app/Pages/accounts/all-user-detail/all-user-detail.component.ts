@@ -194,5 +194,9 @@ export class AllUserDetailComponent implements OnInit {
   navigateToGameList(person: any) {
     this.router.navigateByUrl(`/game-list/${person.operatorId}/${person.name}`)
   }
-
+  navigateToLedger(person: any) {
+    this.router.navigate(['/ledger'], {
+      queryParams: { id: person.operatorId }
+    });
+  }
 }

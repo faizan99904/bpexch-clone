@@ -4,23 +4,43 @@
             <h3 class="text-base font-semibold text-slate-700">Ledger</h3>
         </div>
 
+        <div class="border-b border-slate-200 px-4 py-3">
+            <div class="flex flex-col gap-3 md:flex-row md:items-end">
+                <div class="w-full md:max-w-xs">
+                    <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">Start Date</label>
+                    <my-date-picker class="form-control my-date-picker picker-border" placeholder="Start Date"
+                        name="ledgerStartDate" [(ngModel)]="startDate" [options]="myDpOptions"
+                        readonly></my-date-picker>
+                </div>
+
+                <div class="w-full md:max-w-xs">
+                    <label class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-500">End Date</label>
+                    <my-date-picker class="form-control my-date-picker picker-border" placeholder="End Date"
+                        name="ledgerEndDate" [(ngModel)]="endDate" [options]="myDpOptions"
+                        readonly></my-date-picker>
+                </div>
+
+                <button
+                    class="inline-flex h-[38px] items-center justify-center rounded-lg bg-[#00b181] px-4 text-sm font-medium text-white"
+                    (click)="submitDate()">
+                    Search
+                </button>
+            </div>
+        </div>
+
         <div class="overflow-x-auto">
-            <table class="min-w-full text-sm">
+            <table datatable [dtOptions]="dtOptions" class="min-w-full text-sm">
                 <thead class="bg-slate-100">
                     <tr class="text-left text-xs font-semibold uppercase tracking-wider text-slate-600">
-                        <th class="whitespace-nowrap px-4 py-4">Event ID</th>
-                        <th class="whitespace-nowrap px-4 py-4">Event Name</th>
-                        <th class="whitespace-nowrap px-4 py-4">Sequence</th>
-                        <!-- <th class="whitespace-nowrap px-4 py-4">Link</th>
-                    <th class="whitespace-nowrap px-4 py-4">Global Status</th>
-                    <th class="whitespace-nowrap px-4 py-4">Global Maintenance</th>
-                    <th class="whitespace-nowrap px-4 py-4">Global RTP</th> -->
-                        <th class="whitespace-nowrap px-4 py-4">Operator Enabled</th>
-                        <th class="whitespace-nowrap px-4 py-4">Operator Maintenance</th>
-                        <th class="whitespace-nowrap px-4 py-4">Min Bet</th>
-                        <th class="whitespace-nowrap px-4 py-4">Max Bet</th>
-                        <th class="whitespace-nowrap px-4 py-4">Operator RTP</th>
-                        <th class="whitespace-nowrap px-4 py-4">RTP Override</th>
+                        <th class="whitespace-nowrap px-4 py-4">Created At</th>
+                        <th class="whitespace-nowrap px-4 py-4">External Player ID</th>
+                        <th class="whitespace-nowrap px-4 py-4">Tx ID</th>
+                        <th class="whitespace-nowrap px-4 py-4">Round ID</th>
+                        <th class="whitespace-nowrap px-4 py-4">Game ID</th>
+                        <th class="whitespace-nowrap px-4 py-4">Game Name</th>
+                        <th class="whitespace-nowrap px-4 py-4">Type</th>
+                        <th class="whitespace-nowrap px-4 py-4">Amount</th>
+                        <th class="whitespace-nowrap px-4 py-4">Status</th>
                     </tr>
                 </thead>
 
@@ -28,70 +48,45 @@
                     @for (item of operatorList; track item._id) {
                     <tr class="transition hover:bg-slate-50">
                         <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
-                            {{item.eventId}}
+                            {{ item.createdAt | date: 'M/d/yy, h:mm:ss a' }}
                         </td>
                         <td class="whitespace-nowrap px-4 py-4">
-                            <div class="font-semibold text-slate-800">{{item.eventName}}</div>
+                            <div class="font-semibold text-slate-800">{{ item.externalPlayerId || 'N/A' }}</div>
                         </td>
                         <td class="whitespace-nowrap px-4 py-4 text-slate-600">
-                            {{item.sequence}}
-                        </td>
-
-                        <!-- <td class="whitespace-nowrap px-4 py-4">
-                        <a [href]="item.link" target="_blank"
-                            class="inline-flex max-w-[240px] truncate rounded-lg bg-blue-50 px-3 py-1.5 text-sm font-medium text-blue-700 transition hover:bg-blue-100 hover:text-blue-800">
-                            {{item.link}}
-                        </a>
-                    </td>
-                    <td class="whitespace-nowrap px-4 py-4">
-                        <span
-                            [ngClass]="item.global.isActive ? 'bg-emerald-100 text-emerald-700 ring-emerald-200' : 'bg-rose-100 text-rose-700 ring-rose-200'"
-                            class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset">
-                            {{item.global.isActive ? 'Active' : 'Inactive'}}
-                        </span>
-                    </td>
-                    <td class="whitespace-nowrap px-4 py-4">
-                        <span
-                            [ngClass]="item.global.isMaintenance ? 'bg-amber-100 text-amber-700 ring-amber-200' : 'bg-slate-100 text-slate-700 ring-slate-200'"
-                            class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset">
-                            {{item.global.isMaintenance ? 'Yes' : 'No'}}
-                        </span>
-                    </td>
-                    <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
-                        {{item.global.rtp}}
-                    </td> -->
-                        <td class="whitespace-nowrap px-4 py-4">
-                            <span
-                                [ngClass]="item.operator.enabled ? 'bg-emerald-100 text-emerald-700 ring-emerald-200' : 'bg-rose-100 text-rose-700 ring-rose-200'"
-                                class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset">
-                                {{item.operator.enabled ? 'Yes' : 'No'}}
-                            </span>
+                            {{ item.txId || 'N/A' }}
                         </td>
                         <td class="whitespace-nowrap px-4 py-4">
-                            <span
-                                [ngClass]="item.operator.maintenance ? 'bg-amber-100 text-amber-700 ring-amber-200' : 'bg-slate-100 text-slate-700 ring-slate-200'"
-                                class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset">
-                                {{item.operator.maintenance ? 'Yes' : 'No'}}
+                            {{ item.roundId || 'N/A' }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-4">
+                            {{ item.gameId || 'N/A' }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
+                            {{ item.gameName || 'N/A' }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
+                            {{ item.type || 'N/A' }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
+                            {{ item.amount ?? 0 }}
+                        </td>
+                        <td class="whitespace-nowrap px-4 py-4">
+                            <span class="inline-flex rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset"
+                                [ngClass]="item.status === 'success'
+                                    ? 'bg-emerald-100 text-emerald-700 ring-emerald-200'
+                                    : item.status === 'failed'
+                                      ? 'bg-rose-100 text-rose-700 ring-rose-200'
+                                      : 'bg-amber-100 text-amber-700 ring-amber-200'">
+                                {{ item.status || 'pending' }}
                             </span>
-                        </td>
-                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
-                            {{item.operator.minBet }}
-                        </td>
-                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
-                            {{item.operator.maxBet}}
-                        </td>
-                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
-                            {{item.operator.rtp}}
-                        </td>
-                        <td class="whitespace-nowrap px-4 py-4 font-medium text-slate-700">
-                            {{item.operator.rtpOverride ? item.operator.rtpOverride : 'N/A'}}
                         </td>
                     </tr>
                     }
 
-                    @if (!operatorList?.length) {
+                    @if (!operatorList.length) {
                     <tr>
-                        <td colspan="13" class="px-4 py-10 text-center text-sm text-slate-500">
+                        <td colspan="9" class="px-4 py-10 text-center text-sm text-slate-500">
                             No operators found.
                         </td>
                     </tr>

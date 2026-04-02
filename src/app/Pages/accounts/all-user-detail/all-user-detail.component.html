@@ -80,11 +80,18 @@
                 Edit User
               </span>
             </button>
-            <button *ngIf="!currentUserId" class="relative group delete-btn !bg-purple-500 !border-purple-500" type="button"
-              (click)="navigateToGameList(person)">
+            <button *ngIf="!currentUserId" class="relative group delete-btn !bg-purple-500 !border-purple-500"
+              type="button" (click)="navigateToGameList(person)">
               <i class="fas fa-gamepad"></i>
               <span class="tooltip group-hover:opacity-100 group-hover:translate-y-0">
                 Game List
+              </span>
+            </button>
+            <button *ngIf="!currentUserId" class="relative group delete-btn !bg-blue-500 !border-blue-500"
+              type="button" (click)="navigateToLedger(person)">
+              <i class="fas fa-book-open"></i>
+              <span class="tooltip group-hover:opacity-100 group-hover:translate-y-0">
+                Ledger
               </span>
             </button>
             <button *ngIf="!currentUserId" class="relative group delete-btn" type="button"

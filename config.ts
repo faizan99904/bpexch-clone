@@ -99,5 +99,6 @@ export const CONFIG = {
   addGame: BASE_URL_API + '/api/operator/games',
   updateGameRtp: BASE_URL_API + '/api/operator/games',
   updateGameLimits: BASE_URL_API + '/api/operator/games',
-  adminOperator: BASE_URL_API + '/api/operator/games'
+  adminOperator: BASE_URL_API + '/api/operator/games',
+  gerLedger: BASE_URL_API + '/api/operator/get-wallet-ledger'
 }
